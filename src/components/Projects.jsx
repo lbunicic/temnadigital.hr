@@ -15,7 +15,7 @@ function Projects() {
     },
     {
       name: "UFO Tracking app",
-      rating: "4.8 ★, 2.1k Ratings",
+      rating: "4.8 ★, 4.8k Ratings",
       highlights: [
         "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
         "Identified and resolved multiple performance issues",

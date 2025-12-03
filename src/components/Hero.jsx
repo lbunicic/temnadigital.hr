@@ -38,18 +38,18 @@ function Hero({ onNavigate }) {
         
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-number">5+</span>
+            <span className="stat-number">7+</span>
             <span className="stat-label">Years Experience</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">50+</span>
-            <span className="stat-label">Projects Delivered</span>
+            <span className="stat-number">160M+</span>
+            <span className="stat-label">Users Served</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">30+</span>
-            <span className="stat-label">Happy Clients</span>
+            <span className="stat-number">9+</span>
+            <span className="stat-label">Major Projects</span>
           </div>
         </div>
       </div>
