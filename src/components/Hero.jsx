@@ -1,4 +1,30 @@
+import { useState, useEffect } from 'react';
+
 function Hero({ onNavigate }) {
+  const [displayedName, setDisplayedName] = useState('');
+  const fullName = 'Lovro';
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingDelay = 150;
+    const startDelay = 600;
+
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (currentIndex <= fullName.length) {
+          setDisplayedName(fullName.slice(0, currentIndex));
+          currentIndex++;
+        } else {
+          clearInterval(interval);
+        }
+      }, typingDelay);
+
+      return () => clearInterval(interval);
+    }, startDelay);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   return (
     <section id="home" className="hero">
       <div className="hero-bg">
@@ -8,14 +34,12 @@ function Hero({ onNavigate }) {
       </div>
       
       <div className="hero-content">
-        <div className="hero-badge">
-          <span className="badge-dot"></span>
-          Available for projects
-        </div>
-        
         <h1 className="hero-title">
           <span className="hero-greeting">Hello, I'm</span>
-          <span className="hero-name">Lovro</span>
+          <span className="hero-name">
+            {displayedName}
+            <span className="typing-cursor">|</span>
+          </span>
           <span className="hero-tagline">
             Crafting <span className="highlight">digital experiences</span> that matter
           </span>
