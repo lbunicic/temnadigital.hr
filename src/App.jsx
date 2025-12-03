@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import TechStack from './components/TechStack';
 import Projects from './components/Projects';
 import CV from './components/CV';
 import Blog from './components/Blog';
@@ -75,6 +76,7 @@ function App() {
       <main>
         <Hero onNavigate={scrollToSection} />
         <About />
+        <TechStack />
         <Projects />
         <CV />
         <Blog />
