@@ -4,7 +4,10 @@ import {
   MindfulnessGraphic, 
   BluetoothDeviceGraphic, 
   MobileAppGraphic,
-  DefaultProjectGraphic 
+  TelecomGraphic,
+  GamingArenaGraphic,
+  IoTGraphic,
+  ConferenceGraphic,
 } from './ProjectGraphics';
 
 function Projects() {
@@ -72,6 +75,7 @@ function Projects() {
     },
     {
       name: "Mobile App for a Major Telecom",
+      graphic: <TelecomGraphic />,
       nda: true,
       highlights: [
         "Helped with app development",
@@ -81,6 +85,7 @@ function Projects() {
     },
     {
       name: "Gaming Arena Reservation iPad Application",
+      graphic: <GamingArenaGraphic />,
       nda: true,
       highlights: [
         "Helped resolving backend - client integration issues by introducing Clean Architecture concepts",
@@ -91,6 +96,7 @@ function Projects() {
     },
     {
       name: "Smart Lab Monitoring (IOT)",
+      graphic: <IoTGraphic />,
       nda: true,
       highlights: [
         "Developed a simple app that included sensor data monitoring and push notifications",
@@ -99,6 +105,7 @@ function Projects() {
     },
     {
       name: "HSKIKI26 (freelance project)",
+      graphic: <ConferenceGraphic />,
       nda: true,
       highlights: [
         "Developed native Android and iOS conference itinerary applications for Croatian Meeting of Chemists and Chemical Engineers",

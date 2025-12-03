@@ -1,4 +1,5 @@
 import { TypeDrivenGraphic, BluetoothGraphic } from '../components/BlogGraphics';
+import CodeBlock from '../components/CodeBlock';
 
 export const typeDrivenDesignPost = {
   id: 'type-driven-design',
@@ -69,20 +70,20 @@ export const typeDrivenDesignPost = {
         For example, when packing a drawer, multiple drawer IDs may be available, but without clear type distinctions, 
         it is not immediately obvious which one should be used.
       </p>
-      <pre><code>{`void packDrawer(
+      <CodeBlock language="dart">{`void packDrawer(
   String flightId,
   String drawerId,
   String drawerContainerId,
-)`}</code></pre>
+)`}</CodeBlock>
       <p>
         By encoding the meaning and distinction between the IDs into separate types, we constrain the usage of our API 
         and disallow misuse.
       </p>
-      <pre><code>{`void packDrawer(
+      <CodeBlock language="dart">{`void packDrawer(
   FlightId flightId,
   DrawerId drawerId,
   DrawerContainerId drawerContainerId,
-)`}</code></pre>
+)`}</CodeBlock>
       <p>
         When packing a drawer, the correct usage becomes immediately clear and misuse is virtually impossible. The 
         compiler will catch any errors at an early stage, long before the code has a chance to reach production.
@@ -94,27 +95,27 @@ export const typeDrivenDesignPost = {
         Phantom types are generic types that don't use the generic property. The generic parts are only to distinguish 
         between the different types.
       </p>
-      <pre><code>{`class ID<T> {
+      <CodeBlock language="dart">{`class ID<T> {
   final String value;
   const ID(this.value);
 }
 
 typedef FlightId = ID<Flight>;
 typedef DrawerId = ID<Drawer>;
-typedef DrawerContainerId = ID<DrawerContainer>;`}</code></pre>
+typedef DrawerContainerId = ID<DrawerContainer>;`}</CodeBlock>
       <p>
         We can add some syntax sugar to make the distinction between the IDs even more pronounced.
       </p>
-      <pre><code>{`extension FlightExtension on Flight {
+      <CodeBlock language="dart">{`extension FlightExtension on Flight {
   static FlightId id(String value) => FlightId(value);
 }
 
-final flightId = FlightExtension.id("123");`}</code></pre>
+final flightId = FlightExtension.id("123");`}</CodeBlock>
       <p>
         If the ID is indeed meant to be shared between the models, we can compose an ID constraint referencing the 
         different models.
       </p>
-      <pre><code>{`typedef DrawerId = ID<Drawer>; // Can be used for both Drawer and DrawerContainer`}</code></pre>
+      <CodeBlock language="dart">{`typedef DrawerId = ID<Drawer>; // Can be used for both Drawer and DrawerContainer`}</CodeBlock>
 
       <h3>Example 2. PAN</h3>
       <p>
@@ -137,7 +138,7 @@ final flightId = FlightExtension.id("123");`}</code></pre>
         Instead of PAN being a String, it should be — PAN. Instead of validating the String through the system, we 
         instead parse the data as soon as we acquire it, so whenever there is a PAN, we can trust its validity.
       </p>
-      <pre><code>{`class SensitivePan {
+      <CodeBlock language="dart">{`class SensitivePan {
   final String value;
   
   SensitivePan._(this.value);
@@ -148,7 +149,7 @@ final flightId = FlightExtension.id("123");`}</code></pre>
     }
     return null;
   }
-}`}</code></pre>
+}`}</CodeBlock>
 
       <h4>2. Ensuring safety</h4>
       <p>
@@ -161,7 +162,7 @@ final flightId = FlightExtension.id("123");`}</code></pre>
       <p>
         SensitivePan can be masked and truncated.
       </p>
-      <pre><code>{`sealed class Pan {}
+      <CodeBlock language="dart">{`sealed class Pan {}
 
 class SensitivePan extends Pan {
   final String value;
@@ -189,15 +190,15 @@ class MaskedPan extends Pan {
 class TruncatedPan extends Pan {
   final String value;
   TruncatedPan(this.value);
-}`}</code></pre>
+}`}</CodeBlock>
       <p>
         Now, alongside being sure PAN is validated, we can also be sure it's safe to use in a given context. Certain 
         actions now only receive appropriate pan, making it obvious which pan to provide, and making it very hard to 
         misuse.
       </p>
-      <pre><code>{`void displayPan(MaskedPan pan) { }
+      <CodeBlock language="dart">{`void displayPan(MaskedPan pan) { }
 void logPan(TruncatedPan pan) { }
-void storePan(TruncatedPan pan) { }`}</code></pre>
+void storePan(TruncatedPan pan) { }`}</CodeBlock>
 
       <h4>3. Consuming it</h4>
       <p>
@@ -206,7 +207,7 @@ void storePan(TruncatedPan pan) { }`}</code></pre>
         Some languages provide options for consumable types (e.g., consumable methods in Swift); in others, we can 
         achieve similar effects by adding a consumable type.
       </p>
-      <pre><code>{`class Consumable<T> {
+      <CodeBlock language="dart">{`class Consumable<T> {
   final T _value;
   
   Consumable(this._value);
@@ -214,20 +215,20 @@ void storePan(TruncatedPan pan) { }`}</code></pre>
   void consume(void Function(T) block) {
     block(_value);
   }
-}`}</code></pre>
+}`}</CodeBlock>
       <p>
         Ultimately, we cannot prevent returned String from being copied or stored, but we are limiting the API surface 
         and making it obvious. Since SensitivePan will only be consumed inside a payment method, misuse can now only 
         happen in this isolated (and usually small) environment.
       </p>
-      <pre><code>{`void takePayment(Consumable<SensitivePan> pan) {
+      <CodeBlock language="dart">{`void takePayment(Consumable<SensitivePan> pan) {
   pan.consume((sensitivePan) {
     // Use the sensitive PAN here
     final truncated = sensitivePan.truncate();
     // Store truncated version
   });
   // sensitivePan is no longer accessible here
-}`}</code></pre>
+}`}</CodeBlock>
 
       <h3>Final Thoughts</h3>
       <p>
@@ -308,7 +309,7 @@ export const bleSdkPost = {
         non-related operations should not interfere with the update process.
       </p>
 
-      <pre><code>{`connect(onComplete: {
+      <CodeBlock language="swift">{`connect(onComplete: {
     authorize(onComplete: {
         // OTA
         readPeripheralStatus(onComplete: {
@@ -330,7 +331,7 @@ export const bleSdkPost = {
             disconnect()
         })
     })
-})`}</code></pre>
+})`}</CodeBlock>
 
       <p>
         Let's state the obvious. The pseudocode is too complex and adding any new functionalities (e.g. retry, 
@@ -376,9 +377,9 @@ export const bleSdkPost = {
         In our example, the minimum requirement for an object to be a Command is to conform to the Command interface.
       </p>
 
-      <pre><code>{`interface Command { 
+      <CodeBlock language="swift">{`interface Command { 
     function execute() 
-}`}</code></pre>
+}`}</CodeBlock>
 
       <p>
         The queue executes each command when the previous one finishes so there is no more fear of asynchronous 
@@ -391,10 +392,10 @@ export const bleSdkPost = {
         Our code might now look like this:
       </p>
 
-      <pre><code>{`queue.add(ConnectCommand())
+      <CodeBlock language="swift">{`queue.add(ConnectCommand())
 queue.add(AuthorizationCommand())
 queue.add(OTAUpdateCommand())
-queue.add(DisconnectCommand())`}</code></pre>
+queue.add(DisconnectCommand())`}</CodeBlock>
 
       <p>
         Introducing new commands is quite easy and shouldn't ever break the code you already have. Many of these 
@@ -410,11 +411,11 @@ queue.add(DisconnectCommand())`}</code></pre>
         This was especially useful in solving unstable BLE connection problems.
       </p>
 
-      <pre><code>{`var command = SomeRandomCommand()
+      <CodeBlock language="swift">{`var command = SomeRandomCommand()
 var timeoutCommand = TimeoutCommand(command)
 var retryTimeoutCommand = RetryCommand(timeoutCommand)
 
-queue.add(retryTimeoutCommand)`}</code></pre>
+queue.add(retryTimeoutCommand)`}</CodeBlock>
 
       <h3>Auto Connection, Auto Authorization</h3>
       <p>
@@ -425,18 +426,18 @@ queue.add(retryTimeoutCommand)`}</code></pre>
         we can use OTA:
       </p>
 
-      <pre><code>{`var queue = BasicCommandQueue()
+      <CodeBlock language="swift">{`var queue = BasicCommandQueue()
 
 queue.add(ConnectionCommand())
 queue.add(AuthorizationCommand())
 queue.add(OTAUpdateCommand())
-queue.add(DisconnectCommand())`}</code></pre>
+queue.add(DisconnectCommand())`}</CodeBlock>
 
       <p>
         By introducing queue decorators, we can centralize the connection and authorization code in one place:
       </p>
 
-      <pre><code>{`AuthorizeCommandQueue(commandQueue) {
+      <CodeBlock language="swift">{`AuthorizeCommandQueue(commandQueue) {
     var queue: BasicCommandQueue
     
     func add(command: Command) {
@@ -457,14 +458,14 @@ ConnectionCommandQueue(commandQueue) {
 
 var commandQueue = BasicCommandQueue()
 var authorizeCommandQueue = AuthorizeCommandQueue(commandQueue)
-var connectionCommandQueue = ConnectionCommandQueue(authorizeCommandQueue)`}</code></pre>
+var connectionCommandQueue = ConnectionCommandQueue(authorizeCommandQueue)`}</CodeBlock>
 
       <p>
         From now on, add new operations to the queue without dealing with connection and authorization because 
         it's taken care of by the command queue decorators automatically.
       </p>
 
-      <pre><code>{`connectionCommandQueue.add(OTAUpdateCommand())`}</code></pre>
+      <CodeBlock language="swift">{`connectionCommandQueue.add(OTAUpdateCommand())`}</CodeBlock>
 
       <p>
         And if for some reason we decide to disable or completely remove authorization from the system (change 
@@ -477,11 +478,11 @@ var connectionCommandQueue = ConnectionCommandQueue(authorizeCommandQueue)`}</co
         We've implemented it by creating a Cancelable interface with just the cancel() method.
       </p>
 
-      <pre><code>{`cancelableCommand = OTAUpdateCommand() // conforms to Cancelable 
+      <CodeBlock language="swift">{`cancelableCommand = OTAUpdateCommand() // conforms to Cancelable 
 queue.add(cancelableCommand)
 
 // …
-cancelableCommand.cancel()`}</code></pre>
+cancelableCommand.cancel()`}</CodeBlock>
 
       <h2>To Sum Up</h2>
       <p>

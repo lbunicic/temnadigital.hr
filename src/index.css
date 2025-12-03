@@ -1584,8 +1584,8 @@ a.cv-contact-item:hover {
   position: absolute;
   top: 20px;
   right: 20px;
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   opacity: 0.15;
   transition: all var(--transition-normal);
   pointer-events: none;
@@ -1755,11 +1755,79 @@ a.cv-contact-item:hover {
   50% { transform: translateY(-8px); }
 }
 
+.tower-icon {
+  animation: towerPulse 3s ease-in-out infinite;
+}
+
+@keyframes towerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.controller-icon {
+  animation: controllerShake 3s ease-in-out infinite;
+}
+
+@keyframes controllerShake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+.button-pulse-1,
+.button-pulse-2 {
+  animation: buttonPress 2s ease-in-out infinite;
+}
+
+.button-pulse-2 {
+  animation-delay: 0.5s;
+}
+
+@keyframes buttonPress {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.network-icon {
+  animation: networkPulse 4s ease-in-out infinite;
+}
+
+@keyframes networkPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.calendar-icon {
+  animation: calendarFloat 3s ease-in-out infinite;
+}
+
+@keyframes calendarFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.event-pulse {
+  animation: eventBlink 2s ease-in-out infinite;
+}
+
+@keyframes eventBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.8); }
+}
+
 .project-card-header {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.project-card-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+  padding-right: 110px;
 }
 
 .project-card-labels {
@@ -1768,12 +1836,6 @@ a.cv-contact-item:hover {
   gap: 8px;
 }
 
-.project-card-name {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.3;
-}
 
 .project-card-rating {
   font-size: 0.8rem;
@@ -2252,8 +2314,8 @@ a.contact-value:hover {
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  max-width: 800px;
-  width: 100%;
+  max-width: 1100px;
+  width: 95%;
   max-height: 90vh;
   overflow-y: auto;
   animation: slideUp 0.3s ease;
@@ -2343,36 +2405,41 @@ a.contact-value:hover {
 
 .blog-post-body {
   color: var(--text-secondary);
-  line-height: 1.8;
-  font-size: 1.05rem;
+  line-height: 1.9;
+  font-size: 1.1rem;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .blog-post-body .blog-lead {
-  font-size: 1.25rem;
-  line-height: 1.7;
+  font-size: 1.3rem;
+  line-height: 1.8;
   color: var(--text-primary);
-  margin-bottom: 32px;
+  margin-bottom: 36px;
+  font-weight: 400;
 }
 
 .blog-post-body h2 {
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-size: 1.9rem;
+  font-weight: 700;
   color: var(--text-primary);
-  margin-top: 48px;
-  margin-bottom: 20px;
-  line-height: 1.3;
+  margin-top: 56px;
+  margin-bottom: 24px;
+  line-height: 1.35;
 }
 
 .blog-post-body h3 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-top: 36px;
-  margin-bottom: 16px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  line-height: 1.4;
 }
 
 .blog-post-body p {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  line-height: 1.9;
 }
 
 .blog-post-body ul,
@@ -2413,6 +2480,45 @@ a.contact-value:hover {
   font-weight: 600;
 }
 
+.code-block-wrapper {
+  position: relative;
+  margin: 32px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.code-block-header {
+  background: linear-gradient(135deg, rgba(18, 18, 26, 0.98) 0%, rgba(26, 26, 37, 0.98) 100%);
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code-block-header::before {
+  content: '';
+  display: flex;
+  gap: 6px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ff5f56;
+  box-shadow: 20px 0 0 #ffbd2e, 40px 0 0 #27c93f;
+}
+
+.code-language {
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  color: rgba(192, 132, 252, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-left: 50px;
+}
+
 .blog-post-body pre,
 .code-block {
   position: relative;
@@ -2420,15 +2526,14 @@ a.contact-value:hover {
   border: 1px solid rgba(124, 58, 237, 0.2);
   border-radius: var(--radius-md);
   padding: 20px;
-  margin: 24px 0;
+  margin: 32px 0;
   overflow-x: auto;
   line-height: 1.7;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
 }
 
-.blog-post-body pre::before,
-.code-language {
-  content: 'dart';
+.blog-post-body pre::before {
+  content: 'code';
   position: absolute;
   top: 8px;
   right: 12px;
@@ -2443,46 +2548,20 @@ a.contact-value:hover {
   border-radius: 4px;
 }
 
-.blog-post-body code {
-  font-family: var(--font-mono);
+/* Style for inline code in paragraphs and lists */
+.blog-post-body p code,
+.blog-post-body li code,
+.blog-post-body h2 code,
+.blog-post-body h3 code,
+.blog-post-body h4 code {
   font-size: 0.9em;
   color: #c084fc;
   background: rgba(124, 58, 237, 0.15);
-  padding: 2px 6px;
+  padding: 3px 8px;
   border-radius: 4px;
-}
-
-.blog-post-body pre code {
-  background: none;
-  padding: 0;
-  display: block;
-  color: #e0e0e0;
-}
-
-/* Dart Syntax Highlighting via regex patterns in CSS */
-.blog-post-body pre code {
-  /* Base text color */
-  color: #d4d4d8;
-}
-
-/* Simulate keyword highlighting with text shadow for common patterns */
-.blog-post-body pre {
-  /* Add subtle glow to code blocks */
-  box-shadow: 
-    0 4px 24px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03);
-}
-
-/* Style for inline code in paragraphs */
-.blog-post-body p code,
-.blog-post-body li code {
-  font-size: 0.88em;
-  color: #c084fc;
-  background: rgba(124, 58, 237, 0.15);
-  padding: 2px 7px;
-  border-radius: 4px;
-  border: 1px solid rgba(124, 58, 237, 0.2);
+  border: 1px solid rgba(124, 58, 237, 0.25);
   font-weight: 500;
+  font-family: var(--font-mono);
 }
 
 .blog-post-body strong {

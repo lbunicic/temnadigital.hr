@@ -25,21 +25,38 @@ export function AviationPaymentGraphic() {
       {/* Orbiting circles */}
       <circle cx="60" cy="60" r="35" stroke="url(#aviationGradient)" strokeWidth="1" opacity="0.2" className="orbit-ring" />
       
-      {/* Airplane */}
+      {/* Airplane - side view */}
       <g filter="url(#projectGlow)" className="airplane-icon">
-        <path
-          d="M 60 35 L 65 50 L 80 48 L 65 52 L 70 65 L 62 60 L 54 65 L 59 52 L 44 48 L 59 50 Z"
-          fill="url(#aviationGradient)"
-        />
-        <circle cx="80" cy="30" r="2" fill="#a855f7" className="flight-dot" />
+        {/* Main fuselage body */}
+        <ellipse cx="55" cy="40" rx="22" ry="6" fill="url(#aviationGradient)" />
+        
+        {/* Cockpit/nose */}
+        <path d="M 75 40 L 82 38 L 82 42 L 75 40 Z" fill="url(#aviationGradient)" />
+        
+        {/* Main wings */}
+        <path d="M 50 40 L 45 28 L 60 28 L 60 40 Z" fill="url(#aviationGradient)" opacity="0.8" />
+        <path d="M 50 40 L 45 52 L 60 52 L 60 40 Z" fill="url(#aviationGradient)" opacity="0.8" />
+        
+        {/* Tail */}
+        <path d="M 33 40 L 28 32 L 35 36 Z" fill="url(#aviationGradient)" />
+        
+        {/* Windows */}
+        <circle cx="58" cy="40" r="1.5" fill="rgba(255,255,255,0.6)" />
+        <circle cx="64" cy="40" r="1.5" fill="rgba(255,255,255,0.6)" />
+        <circle cx="70" cy="40" r="1.5" fill="rgba(255,255,255,0.6)" />
+        
+        {/* Flight trail */}
+        <circle cx="20" cy="40" r="1.5" fill="#a855f7" opacity="0.4" className="flight-dot" />
+        <circle cx="15" cy="40" r="1" fill="#a855f7" opacity="0.2" className="flight-dot" />
       </g>
 
       {/* Credit card */}
       <g filter="url(#projectGlow)" className="card-icon">
-        <rect x="30" y="70" width="35" height="22" rx="3" fill="url(#aviationGradient)" opacity="0.9" />
-        <rect x="30" y="73" width="35" height="5" fill="rgba(255,255,255,0.3)" />
-        <rect x="33" y="82" width="15" height="3" rx="1" fill="rgba(255,255,255,0.5)" />
-        <rect x="33" y="87" width="8" height="2" rx="1" fill="rgba(255,255,255,0.3)" />
+        <rect x="35" y="65" width="40" height="25" rx="3" fill="url(#aviationGradient)" opacity="0.9" />
+        <rect x="35" y="68" width="40" height="6" fill="rgba(255,255,255,0.3)" />
+        <rect x="38" y="78" width="18" height="3" rx="1" fill="rgba(255,255,255,0.5)" />
+        <rect x="38" y="83" width="10" height="2" rx="1" fill="rgba(255,255,255,0.3)" />
+        <rect x="62" y="83" width="10" height="4" rx="1" fill="rgba(255,255,255,0.4)" />
       </g>
     </svg>
   );
@@ -203,6 +220,154 @@ export function MobileAppGraphic() {
         
         {/* Notification dot */}
         <circle cx="70" cy="36" r="2" fill="#f5576c" className="notification-pulse" />
+      </g>
+    </svg>
+  );
+}
+
+export function TelecomGraphic() {
+  return (
+    <svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="project-graphic"
+    >
+      <defs>
+        <linearGradient id="telecomGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#f093fb" />
+          <stop offset="100%" stopColor="#f5576c" />
+        </linearGradient>
+      </defs>
+
+      {/* Signal tower */}
+      <g className="tower-icon">
+        <path d="M 60 35 L 55 75 L 65 75 Z" fill="url(#telecomGradient)" />
+        <rect x="57" y="75" width="6" height="15" fill="url(#telecomGradient)" opacity="0.8" />
+        
+        {/* Signal waves */}
+        <path d="M 45 45 Q 35 55 45 65" stroke="url(#telecomGradient)" strokeWidth="2" fill="none" opacity="0.6" className="signal-wave-1" />
+        <path d="M 38 40 Q 25 55 38 70" stroke="url(#telecomGradient)" strokeWidth="2" fill="none" opacity="0.4" className="signal-wave-2" />
+        
+        <path d="M 75 45 Q 85 55 75 65" stroke="url(#telecomGradient)" strokeWidth="2" fill="none" opacity="0.6" className="signal-wave-1" />
+        <path d="M 82 40 Q 95 55 82 70" stroke="url(#telecomGradient)" strokeWidth="2" fill="none" opacity="0.4" className="signal-wave-2" />
+      </g>
+    </svg>
+  );
+}
+
+export function GamingArenaGraphic() {
+  return (
+    <svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="project-graphic"
+    >
+      <defs>
+        <linearGradient id="gamingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fc466b" />
+          <stop offset="100%" stopColor="#3f5efb" />
+        </linearGradient>
+      </defs>
+
+      {/* Gaming controller */}
+      <g className="controller-icon">
+        <rect x="35" y="50" width="50" height="25" rx="12" fill="url(#gamingGradient)" opacity="0.9" />
+        
+        {/* D-pad */}
+        <rect x="43" y="58" width="3" height="10" rx="1" fill="rgba(255,255,255,0.6)" />
+        <rect x="40" y="61" width="9" height="3" rx="1" fill="rgba(255,255,255,0.6)" />
+        
+        {/* Buttons */}
+        <circle cx="70" cy="60" r="3" fill="rgba(255,255,255,0.6)" className="button-pulse-1" />
+        <circle cx="77" cy="63" r="3" fill="rgba(255,255,255,0.5)" className="button-pulse-2" />
+        
+        {/* Handles */}
+        <path d="M 35 62 Q 28 68 30 75" stroke="url(#gamingGradient)" strokeWidth="4" strokeLinecap="round" fill="none" />
+        <path d="M 85 62 Q 92 68 90 75" stroke="url(#gamingGradient)" strokeWidth="4" strokeLinecap="round" fill="none" />
+      </g>
+    </svg>
+  );
+}
+
+export function IoTGraphic() {
+  return (
+    <svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="project-graphic"
+    >
+      <defs>
+        <linearGradient id="iotGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#4facfe" />
+          <stop offset="100%" stopColor="#00f2fe" />
+        </linearGradient>
+      </defs>
+
+      {/* Network nodes */}
+      <g className="network-icon">
+        <circle cx="60" cy="40" r="5" fill="url(#iotGradient)" />
+        <circle cx="40" cy="65" r="5" fill="url(#iotGradient)" />
+        <circle cx="80" cy="65" r="5" fill="url(#iotGradient)" />
+        <circle cx="60" cy="80" r="5" fill="url(#iotGradient)" />
+        
+        {/* Connections */}
+        <line x1="60" y1="40" x2="40" y2="65" stroke="url(#iotGradient)" strokeWidth="2" opacity="0.4" />
+        <line x1="60" y1="40" x2="80" y2="65" stroke="url(#iotGradient)" strokeWidth="2" opacity="0.4" />
+        <line x1="40" y1="65" x2="60" y2="80" stroke="url(#iotGradient)" strokeWidth="2" opacity="0.4" />
+        <line x1="80" y1="65" x2="60" y2="80" stroke="url(#iotGradient)" strokeWidth="2" opacity="0.4" />
+        
+        {/* Pulse rings */}
+        <circle cx="60" cy="40" r="8" stroke="url(#iotGradient)" strokeWidth="1" opacity="0.3" className="ripple-1" />
+        <circle cx="60" cy="40" r="12" stroke="url(#iotGradient)" strokeWidth="1" opacity="0.2" className="ripple-2" />
+      </g>
+    </svg>
+  );
+}
+
+export function ConferenceGraphic() {
+  return (
+    <svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="project-graphic"
+    >
+      <defs>
+        <linearGradient id="conferenceGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fa709a" />
+          <stop offset="100%" stopColor="#fee140" />
+        </linearGradient>
+      </defs>
+
+      {/* Calendar/Schedule */}
+      <g className="calendar-icon">
+        <rect x="35" y="35" width="50" height="50" rx="5" fill="url(#conferenceGradient)" opacity="0.2" stroke="url(#conferenceGradient)" strokeWidth="2" />
+        
+        {/* Header */}
+        <rect x="35" y="35" width="50" height="10" rx="5" fill="url(#conferenceGradient)" opacity="0.6" />
+        
+        {/* Grid lines */}
+        <line x1="35" y1="55" x2="85" y2="55" stroke="url(#conferenceGradient)" strokeWidth="1" opacity="0.3" />
+        <line x1="35" y1="65" x2="85" y2="65" stroke="url(#conferenceGradient)" strokeWidth="1" opacity="0.3" />
+        <line x1="35" y1="75" x2="85" y2="75" stroke="url(#conferenceGradient)" strokeWidth="1" opacity="0.3" />
+        
+        <line x1="52" y1="45" x2="52" y2="85" stroke="url(#conferenceGradient)" strokeWidth="1" opacity="0.3" />
+        <line x1="68" y1="45" x2="68" y2="85" stroke="url(#conferenceGradient)" strokeWidth="1" opacity="0.3" />
+        
+        {/* Event dots */}
+        <circle cx="44" cy="60" r="2" fill="url(#conferenceGradient)" className="event-pulse" />
+        <circle cx="60" cy="70" r="2" fill="url(#conferenceGradient)" className="event-pulse" />
       </g>
     </svg>
   );
