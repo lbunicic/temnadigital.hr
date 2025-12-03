@@ -260,10 +260,11 @@ input, textarea {
 }
 
 .navbar.scrolled {
-  background: rgba(10, 10, 15, 0.85);
+  background: var(--bg-secondary);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border-color);
   padding: 12px 0;
+  box-shadow: var(--shadow-sm);
 }
 
 .nav-container {
