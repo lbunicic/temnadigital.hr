@@ -1,7 +1,17 @@
+import { 
+  AviationPaymentGraphic, 
+  UFOGraphic, 
+  MindfulnessGraphic, 
+  BluetoothDeviceGraphic, 
+  MobileAppGraphic,
+  DefaultProjectGraphic 
+} from './ProjectGraphics';
+
 function Projects() {
   const projects = [
     {
       name: "most.io - Aviation Retail Platform",
+      graphic: <AviationPaymentGraphic />,
       stats: "160M+ Passengers • 28K+ Crew • 1K+ Aircrafts",
       highlights: [
         "Building cross-platform Flutter payment and retail solutions for aviation industry",
@@ -15,6 +25,7 @@ function Projects() {
     },
     {
       name: "UFO Tracking app",
+      graphic: <UFOGraphic />,
       rating: "4.8 ★, 4.8k Ratings",
       highlights: [
         "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
@@ -25,6 +36,7 @@ function Projects() {
     },
     {
       name: "Nova Eva (freelance project)",
+      graphic: <MobileAppGraphic />,
       rating: "4.9 ★, 108 ratings",
       highlights: ["Maintaining the app since 2020"],
       technologies: ["UIKit"],
@@ -32,6 +44,7 @@ function Projects() {
     },
     {
       name: "Bluetooth (BLE) SDK for a medical device",
+      graphic: <BluetoothDeviceGraphic />,
       nda: true,
       highlights: [
         "Helped design the public API for the SDK",
@@ -45,6 +58,7 @@ function Projects() {
     },
     {
       name: "Mindfulness app",
+      graphic: <MindfulnessGraphic />,
       nda: true,
       highlights: [
         "Led the project development (architecture setup, style guide, code reviews etc.)",
@@ -109,17 +123,24 @@ function Projects() {
         <div className="projects-grid">
           {projects.map((project, index) => (
             <article key={index} className="project-card">
+              {project.graphic && (
+                <div className="project-card-graphic">
+                  {project.graphic}
+                </div>
+              )}
               <div className="project-card-header">
                 <h3 className="project-card-name">{project.name}</h3>
-                {project.rating && (
-                  <span className="project-card-rating">{project.rating}</span>
-                )}
-                {project.stats && (
-                  <span className="project-card-stats">{project.stats}</span>
-                )}
-                {project.nda && !project.rating && !project.stats && (
-                  <span className="project-card-nda">NDA</span>
-                )}
+                <div className="project-card-labels">
+                  {project.rating && (
+                    <span className="project-card-rating">{project.rating}</span>
+                  )}
+                  {project.stats && (
+                    <span className="project-card-stats">{project.stats}</span>
+                  )}
+                  {project.nda && !project.rating && !project.stats && (
+                    <span className="project-card-nda">NDA</span>
+                  )}
+                </div>
               </div>
               <ul className="project-card-highlights">
                 {project.highlights.map((highlight, idx) => (

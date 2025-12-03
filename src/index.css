@@ -1570,6 +1570,8 @@ a.cv-contact-item:hover {
   flex-direction: column;
   transition: all var(--transition-normal);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
 }
 
 .project-card:hover {
@@ -1578,18 +1580,192 @@ a.cv-contact-item:hover {
   box-shadow: 0 12px 40px rgba(124, 58, 237, 0.25);
 }
 
+.project-card-graphic {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  opacity: 0.15;
+  transition: all var(--transition-normal);
+  pointer-events: none;
+}
+
+.project-card:hover .project-card-graphic {
+  opacity: 0.25;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.project-graphic {
+  width: 100%;
+  height: 100%;
+}
+
+/* Project graphic animations */
+.orbit-ring {
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.airplane-icon {
+  animation: flyAround 6s ease-in-out infinite;
+}
+
+@keyframes flyAround {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(5px, -5px); }
+  50% { transform: translate(-3px, 3px); }
+  75% { transform: translate(3px, 5px); }
+}
+
+.flight-dot {
+  animation: blink 2s ease-in-out infinite;
+}
+
+.card-icon {
+  animation: cardPulse 3s ease-in-out infinite;
+}
+
+@keyframes cardPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.ufo-float {
+  animation: floatUFO 4s ease-in-out infinite;
+}
+
+@keyframes floatUFO {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.ufo-beam {
+  animation: beamPulse 2s ease-in-out infinite;
+}
+
+@keyframes beamPulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+.twinkle-star-1,
+.twinkle-star-2,
+.twinkle-star-3 {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.twinkle-star-2 {
+  animation-delay: 1s;
+}
+
+.twinkle-star-3 {
+  animation-delay: 2s;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+.ripple-1 {
+  animation: ripple 3s ease-out infinite;
+}
+
+.ripple-2 {
+  animation: ripple 3s ease-out 0.5s infinite;
+}
+
+.ripple-3 {
+  animation: ripple 3s ease-out 1s infinite;
+}
+
+@keyframes ripple {
+  0% {
+    r: 10;
+    opacity: 0.6;
+  }
+  100% {
+    r: 40;
+    opacity: 0;
+  }
+}
+
+.meditation-icon {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.signal-wave-1,
+.signal-wave-2 {
+  animation: signalPulse 2s ease-in-out infinite;
+}
+
+.signal-wave-2 {
+  animation-delay: 0.5s;
+}
+
+@keyframes signalPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.8; }
+}
+
+.bt-device-icon {
+  animation: float 3s ease-in-out infinite;
+}
+
+.phone-icon {
+  animation: phoneBounce 3s ease-in-out infinite;
+}
+
+@keyframes phoneBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.notification-pulse {
+  animation: notificationPulse 2s ease-in-out infinite;
+}
+
+@keyframes notificationPulse {
+  0%, 100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.5;
+    transform: scale(1.3);
+  }
+}
+
+.code-icon {
+  animation: codeFloat 4s ease-in-out infinite;
+}
+
+@keyframes codeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
 .project-card-header {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
   gap: 12px;
   margin-bottom: 16px;
 }
 
-.project-card-header h3 {
-  flex: 1 1 auto;
-  min-width: 200px;
+.project-card-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 .project-card-name {
