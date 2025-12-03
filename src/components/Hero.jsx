@@ -2,6 +2,10 @@ import { useState, useEffect } from 'react';
 
 function Hero({ onNavigate }) {
   const [displayedName, setDisplayedName] = useState('');
+  const [yearsCount, setYearsCount] = useState(0);
+  const [usersCount, setUsersCount] = useState(0);
+  const [projectsCount, setProjectsCount] = useState(0);
+  
   const fullName = 'Lovro';
 
   useEffect(() => {
@@ -20,6 +24,41 @@ function Hero({ onNavigate }) {
       }, typingDelay);
 
       return () => clearInterval(interval);
+    }, startDelay);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // Animated counters
+  useEffect(() => {
+    const duration = 2000; // 2 seconds
+    const startDelay = 1200; // Start after name animation
+    
+    const timeout = setTimeout(() => {
+      const startTime = Date.now();
+      const endValues = {
+        years: 7,
+        users: 160,
+        projects: 9
+      };
+
+      const animate = () => {
+        const now = Date.now();
+        const progress = Math.min((now - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        
+        setYearsCount(Math.floor(easeOutQuart * endValues.years));
+        setUsersCount(Math.floor(easeOutQuart * endValues.users));
+        setProjectsCount(Math.floor(easeOutQuart * endValues.projects));
+        
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+      
+      animate();
     }, startDelay);
 
     return () => clearTimeout(timeout);
@@ -62,17 +101,17 @@ function Hero({ onNavigate }) {
         
         <div className="hero-stats">
           <div className="stat">
-            <span className="stat-number">7+</span>
+            <span className="stat-number">{yearsCount}+</span>
             <span className="stat-label">Years Experience</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">160M+</span>
+            <span className="stat-number">Millions</span>
             <span className="stat-label">Users Served</span>
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">9+</span>
+            <span className="stat-number">{projectsCount}+</span>
             <span className="stat-label">Major Projects</span>
           </div>
         </div>
