@@ -1,26 +1,20 @@
+import { useState } from 'react';
+import BlogPost from './BlogPost';
+import { typeDrivenDesignPost, bleSdkPost } from '../data/blogPosts';
+
 function Blog() {
+  const [selectedPost, setSelectedPost] = useState(null);
+
   const posts = [
     {
-      id: 1,
-      title: 'Type-Driven Design: Safer Software for Complex Domains',
-      excerpt: 'Exploring how leveraging strong type systems can help us build more reliable, maintainable software for complex business domains. A deep dive into type-driven design principles.',
-      category: 'Software Engineering',
-      date: 'Oct 22, 2025',
-      readTime: '12 min read',
+      ...typeDrivenDesignPost,
       featured: true,
-      gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-      link: 'https://medium.com/@lovro.bunicic/type-driven-design-6412f29e3d5d',
+      fullPost: typeDrivenDesignPost,
     },
     {
-      id: 2,
-      title: 'Architectural Challenges in BLE SDK Development',
-      excerpt: 'Lessons learned from building a Bluetooth Low Energy SDK for medical devices, including OTA updates and API design.',
-      category: 'Mobile Development',
-      date: 'Sep 15, 2024',
-      readTime: '10 min read',
+      ...bleSdkPost,
       featured: false,
-      gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-      link: 'http://tinyurl.com/ble-blogpost',
+      fullPost: bleSdkPost,
     },
     {
       id: 3,
@@ -84,15 +78,13 @@ function Blog() {
                 </div>
                 <h3 className="blog-title">{featuredPost.title}</h3>
                 <p className="blog-excerpt">{featuredPost.excerpt}</p>
-                <a 
-                  href={featuredPost.link || '#'} 
-                  target={featuredPost.link ? '_blank' : '_self'}
-                  rel={featuredPost.link ? 'noopener noreferrer' : ''}
-                  className="blog-link"
+                <button 
+                  onClick={() => setSelectedPost(featuredPost.fullPost)}
+                  className="blog-link blog-link-button"
                 >
                   Read Article
                   <span className="link-arrow">→</span>
-                </a>
+                </button>
               </div>
             </article>
           )}
@@ -110,14 +102,12 @@ function Blog() {
                   <p className="blog-excerpt">{post.excerpt}</p>
                   <div className="blog-footer">
                     <span className="blog-read-time">{post.readTime}</span>
-                    <a 
-                      href={post.link || '#'} 
-                      target={post.link ? '_blank' : '_self'}
-                      rel={post.link ? 'noopener noreferrer' : ''}
-                      className="blog-link"
+                    <button 
+                      onClick={() => setSelectedPost(post.fullPost)}
+                      className="blog-link blog-link-button"
                     >
                       Read →
-                    </a>
+                    </button>
                   </div>
                 </div>
               </article>
@@ -131,6 +121,10 @@ function Blog() {
           </button>
         </div>
       </div>
+
+      {selectedPost && (
+        <BlogPost post={selectedPost} onClose={() => setSelectedPost(null)} />
+      )}
     </section>
   );
 }
