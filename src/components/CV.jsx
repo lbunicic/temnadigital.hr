@@ -226,11 +226,14 @@ function CV() {
             </div>
           </div>
 
-          <div className="cv-section-block">
+          <div className="cv-section-block projects-section">
             <h2 className="cv-section-title">
               <span className="cv-title-icon">□</span>
               Notable Projects
             </h2>
+            <p className="projects-subtitle">
+              A selection of key projects showcasing my expertise in mobile development, fintech, and complex system architecture
+            </p>
             <div className="cv-projects-grid">
               {projects.map((project, index) => (
                 <div key={index} className="cv-project-card">
