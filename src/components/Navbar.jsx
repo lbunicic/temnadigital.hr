@@ -15,8 +15,7 @@ function Navbar({ activeSection, onNavigate }) {
   const navItems = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
-    { id: 'portfolio', label: 'Portfolio' },
-    { id: 'cv', label: 'CV' },
+    { id: 'cv', label: 'Experience' },
     { id: 'blog', label: 'Blog' },
     { id: 'contact', label: 'Contact' },
   ];

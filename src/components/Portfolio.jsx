@@ -10,10 +10,11 @@ function Portfolio() {
       id: 1,
       title: 'UFO Tracking App',
       category: 'mobile',
-      description: 'Refactored legacy codebase, set up modern architecture, and delivered to App Store. Resolved critical performance issues. 4.8★ rating with 2.1k reviews.',
+      description: 'Refactored legacy codebase, set up modern architecture, and delivered to App Store. Resolved critical performance issues.',
       tags: ['SwiftUI', 'MapKit', 'Sentry', 'GraphQL'],
       image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       featured: true,
+      rating: '4.8 ★, 2.1k Ratings',
       link: 'https://tinyurl.com/enigma-ios',
     },
     {
@@ -57,10 +58,11 @@ function Portfolio() {
       id: 6,
       title: 'Nova Eva',
       category: 'mobile',
-      description: 'Freelance project maintained since 2020. 4.9★ rating with 95 reviews on App Store.',
+      description: 'Freelance project maintained since 2020.',
       tags: ['UIKit', 'iOS'],
       image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
       featured: false,
+      rating: '4.9 ★, 95 ratings',
       link: 'https://tinyurl.com/nova-eva',
     },
   ];
@@ -98,21 +100,28 @@ function Portfolio() {
           {filteredProjects.map((project) => (
             <article 
               key={project.id} 
-              className={`project-card ${project.featured ? 'featured' : ''}`}
+              className={`project-card ${project.featured ? 'featured' : ''} ${!project.image ? 'no-image' : ''}`}
             >
-              <div className="project-image" style={{ background: project.image }}>
-                <div className="project-overlay">
-                  {project.link ? (
-                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
-                      View Project →
-                    </a>
-                  ) : (
-                    <span className="project-link project-link-disabled">NDA Project</span>
+              {project.image && (
+                <div className="project-image" style={{ background: project.image }}>
+                  <div className="project-overlay">
+                    {project.link ? (
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                        View Project →
+                      </a>
+                    ) : (
+                      <span className="project-link project-link-disabled">NDA Project</span>
+                    )}
+                  </div>
+                </div>
+              )}
+              <div className="project-content">
+                <div className="project-header-info">
+                  <span className="project-category">{project.category}</span>
+                  {project.rating && (
+                    <span className="project-rating">{project.rating}</span>
                   )}
                 </div>
-              </div>
-              <div className="project-content">
-                <span className="project-category">{project.category}</span>
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
                 <div className="project-tags">

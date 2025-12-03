@@ -147,9 +147,9 @@ function CV() {
     <section id="cv" className="cv-section">
       <div className="section-container">
         <div className="section-header">
-          <span className="section-tag">Curriculum Vitae</span>
+          <span className="section-tag">Experience & Projects</span>
           <h2 className="section-title">
-            Professional <span className="text-gradient">Experience</span> & Background
+            Professional <span className="text-gradient">Journey</span> & Notable Work
           </h2>
         </div>
 

@@ -824,6 +824,15 @@ input, textarea {
   grid-row: span 2;
 }
 
+.project-card.no-image {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card.no-image .project-content {
+  flex: 1;
+}
+
 .project-image {
   position: relative;
   aspect-ratio: 16/10;
@@ -1843,23 +1852,76 @@ a.contact-value:hover {
   font-weight: 600;
 }
 
-.blog-post-body pre {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+.blog-post-body pre,
+.code-block {
+  position: relative;
+  background: linear-gradient(135deg, rgba(18, 18, 26, 0.95) 0%, rgba(26, 26, 37, 0.95) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.2);
   border-radius: var(--radius-md);
   padding: 20px;
   margin: 24px 0;
   overflow-x: auto;
+  line-height: 1.7;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.blog-post-body pre::before,
+.code-language {
+  content: 'dart';
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  color: rgba(192, 132, 252, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  background: rgba(124, 58, 237, 0.15);
+  padding: 3px 8px;
+  border-radius: 4px;
 }
 
 .blog-post-body code {
   font-family: var(--font-mono);
   font-size: 0.9em;
-  color: var(--accent-tertiary);
+  color: #c084fc;
+  background: rgba(124, 58, 237, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .blog-post-body pre code {
-  color: var(--text-secondary);
+  background: none;
+  padding: 0;
+  display: block;
+  color: #e0e0e0;
+}
+
+/* Dart Syntax Highlighting via regex patterns in CSS */
+.blog-post-body pre code {
+  /* Base text color */
+  color: #d4d4d8;
+}
+
+/* Simulate keyword highlighting with text shadow for common patterns */
+.blog-post-body pre {
+  /* Add subtle glow to code blocks */
+  box-shadow: 
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+/* Style for inline code in paragraphs */
+.blog-post-body p code,
+.blog-post-body li code {
+  font-size: 0.88em;
+  color: #c084fc;
+  background: rgba(124, 58, 237, 0.15);
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  font-weight: 500;
 }
 
 .blog-post-body strong {
