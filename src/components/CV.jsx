@@ -5,13 +5,27 @@ function CV() {
     phone: "00385989393533",
     location: "Zagreb, Croatia",
     linkedin: "https://www.linkedin.com/in/lovro-buničić/",
+    company: "most.io",
+    companyUrl: "https://most.io/",
   };
 
   const experience = [
     {
+      title: "Senior iOS Engineer",
+      company: "most.io (Aviation Retail & PCI Fintech)",
+      period: "2024 - Present",
+      highlights: [
+        "Building payment and retail solutions for aviation industry",
+        "Working with PCI-compliant fintech systems for airline transactions",
+        "iOS development for mobile retail platforms used by 28,000+ airline crew",
+        "Supporting 1,000+ aircrafts and 160M+ passengers globally",
+        "Clients include Southwest Airlines, Play, Hawaiian Airlines, and more",
+      ],
+    },
+    {
       title: "Senior Software Engineer",
       company: "Ars Futura d.o.o, Zagreb, Croatia",
-      period: "2023 - Present",
+      period: "2023 - 2024",
       highlights: [
         "iOS Development (UIKit, SwiftUI, Combine, RxSwift, SceneKit, CoreBluetooth...)",
         "Unit testing, Snapshot testing",
@@ -151,6 +165,10 @@ function CV() {
                 <span className="cv-icon">◎</span>
                 {contactInfo.location}
               </span>
+              <a href={contactInfo.companyUrl} target="_blank" rel="noopener noreferrer" className="cv-contact-item">
+                <span className="cv-icon">◇</span>
+                {contactInfo.company}
+              </a>
               <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer" className="cv-contact-item">
                 <span className="cv-icon">◈</span>
                 LinkedIn

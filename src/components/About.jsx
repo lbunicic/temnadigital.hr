@@ -16,18 +16,18 @@ function About() {
     },
     {
       icon: '△',
-      title: 'SDK Development',
-      description: 'Building robust SDKs and frameworks, including BLE and hardware integration.',
+      title: 'Fintech & Payments',
+      description: 'PCI-compliant payment systems and secure transaction processing for aviation retail.',
     },
     {
       icon: '○',
-      title: 'Team Leadership',
-      description: 'Mentoring developers, conducting interviews, and fostering team collaboration.',
+      title: 'SDK & Hardware',
+      description: 'Building robust SDKs, BLE integration, and hardware-software solutions.',
     },
     {
       icon: '□',
-      title: 'Architecture & CI/CD',
-      description: 'Clean architecture patterns, testing strategies, and automated deployment pipelines.',
+      title: 'Enterprise Solutions',
+      description: 'Scalable systems serving thousands of users with clean architecture and CI/CD.',
     },
   ];
 
@@ -44,18 +44,20 @@ function About() {
         <div className="about-content">
           <div className="about-text">
             <p className="about-lead">
-              I'm Lovro, a Senior iOS Engineer and Team Lead at Ars Futura. With over 7 years of experience, 
-              I specialize in building high-quality native iOS applications and leading development teams.
+              I'm Lovro, a Senior iOS Engineer at most.io, working on aviation retail and PCI-compliant fintech 
+              solutions. With over 7 years of experience, I specialize in building high-quality native iOS 
+              applications for enterprise-scale systems.
+            </p>
+            <p>
+              Currently at most.io, I'm building payment and retail platforms used by 28,000+ airline crew 
+              members across 1,000+ aircrafts, serving 160M+ passengers globally. Our clients include Southwest 
+              Airlines, Play, Hawaiian Airlines, and other major carriers.
             </p>
             <p>
               My expertise spans the entire iOS ecosystem—from UIKit and SwiftUI to advanced frameworks like 
               CoreBluetooth, SceneKit, and RxSwift. I've led projects for major telecom companies, built 
-              BLE SDKs for medical devices, and developed apps that serve thousands of users daily.
-            </p>
-            <p>
-              As a Team Lead, I mentor junior and mid-level developers, conduct technical interviews, and 
-              foster cross-team collaboration. I'm passionate about clean architecture, automated testing, 
-              and sharing knowledge with the developer community.
+              BLE SDKs for medical devices, and developed secure payment systems. I'm passionate about clean 
+              architecture, automated testing, and delivering solutions that make a real impact.
             </p>
           </div>
 

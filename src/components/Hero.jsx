@@ -22,8 +22,8 @@ function Hero({ onNavigate }) {
         </h1>
         
         <p className="hero-description">
-          Founder of Temna Digital — a creative studio specializing in web development, 
-          digital strategy, and building products that people love to use.
+          Senior iOS Engineer at most.io — building PCI-compliant payment and retail solutions 
+          for the aviation industry, serving 160M+ passengers across major airlines worldwide.
         </p>
         
         <div className="hero-cta">
