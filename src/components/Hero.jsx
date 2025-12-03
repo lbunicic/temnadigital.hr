@@ -56,7 +56,7 @@ function Hero({ onNavigate }) {
             <span className="btn-arrow">→</span>
           </button>
           <button className="btn btn-secondary" onClick={() => onNavigate('contact')}>
-            Get in Touch
+            Say Hello 👋
           </button>
         </div>
         

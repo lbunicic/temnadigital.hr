@@ -56,13 +56,13 @@ function Contact() {
         <div className="contact-grid">
           <div className="contact-info">
             <div className="contact-intro">
-              <h3>Get in Touch</h3>
+              <h3>Get in Touch 👋</h3>
               <p>
                 Whether you have a question, want to start a project, or simply want to connect — 
                 feel free to reach out. I'm always open to discussing new opportunities.
               </p>
             </div>
-
+    
             <div className="contact-details">
               {contactInfo.map((item) => (
                 <div key={item.label} className="contact-item">

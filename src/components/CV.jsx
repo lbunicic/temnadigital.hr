@@ -1,3 +1,5 @@
+import profileImg from '../assets/profile.jpg';
+
 function CV() {
   const contactInfo = {
     name: "Lovro Buničić",
@@ -80,8 +82,10 @@ function CV() {
 
         <div className="cv-content">
           <div className="cv-header-card">
-            <h1 className="cv-name">{contactInfo.name}</h1>
-            <div className="cv-contact">
+            <img src={profileImg} alt="Lovro Buničić" className="cv-profile-img" />
+            <div className="cv-header-info">
+              <h1 className="cv-name">{contactInfo.name}</h1>
+              <div className="cv-contact">
               <a href={`mailto:${contactInfo.email}`} className="cv-contact-item">
                 <span className="cv-icon">✉</span>
                 {contactInfo.email}
@@ -98,6 +102,7 @@ function CV() {
                 <span className="cv-icon">◈</span>
                 LinkedIn
               </a>
+            </div>
             </div>
           </div>
 

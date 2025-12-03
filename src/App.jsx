@@ -7,10 +7,12 @@ import CV from './components/CV';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import MessageComposer from './components/MessageComposer';
 import './App.css';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
+  const [showMessageComposer, setShowMessageComposer] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +37,12 @@ function App() {
   }, []);
 
   const scrollToSection = (sectionId) => {
+    if (sectionId === 'contact') {
+      // Open message composer instead of scrolling
+      setShowMessageComposer(true);
+      return;
+    }
+    
     const element = document.getElementById(sectionId);
     if (element) {
       const offsetTop = element.offsetTop - 80;
@@ -44,6 +52,21 @@ function App() {
       });
     }
     setActiveSection(sectionId);
+  };
+
+  const handleMessageSubmit = (message) => {
+    // Handle message submission (e.g., send to email, API, etc.)
+    console.log('Message:', message);
+    // Then scroll to contact section
+    const element = document.getElementById('contact');
+    if (element) {
+      const offsetTop = element.offsetTop - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth',
+      });
+    }
+    setActiveSection('contact');
   };
 
   return (
@@ -58,6 +81,11 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <MessageComposer 
+        isOpen={showMessageComposer}
+        onClose={() => setShowMessageComposer(false)}
+        onSubmit={handleMessageSubmit}
+      />
     </div>
   );
 }
