@@ -272,16 +272,235 @@ void storePan(TruncatedPan pan) { }`}</code></pre>
 
 export const bleSdkPost = {
   id: 'ble-sdk-architecture',
-  title: 'Architectural Challenges in BLE SDK Development',
-  excerpt: 'Lessons learned from building a Bluetooth Low Energy SDK for medical devices, including OTA updates and API design.',
+  title: 'Solving Architectural Problems in Bluetooth Low Energy Mobile Apps',
+  excerpt: 'Learn how to create a solid BLE architecture using Command and Queue patterns to handle complex operations like OTA firmware updates.',
   category: 'Mobile Development',
-  date: 'Sep 15, 2024',
+  date: 'Jan 27, 2021',
   readTime: '10 min read',
-  author: 'Lovro Buničić',
+  author: 'Lovro Buničić & Josip Grubeša',
   gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-  originalLink: 'http://tinyurl.com/ble-blogpost',
+  originalLink: 'https://arsfutura.com/blog/solving-architectural-problems-in-bluetooth-low-energy-mobile-apps',
   content: (
-    <p>Read the full article on Medium: <a href="http://tinyurl.com/ble-blogpost" target="_blank" rel="noopener noreferrer">BLE SDK Architecture</a></p>
+    <>
+      <p className="blog-lead">
+        Originally published on Ars Futura blog. Learn how to create a solid BLE architecture, 
+        as solid as the Colosseum. 🏛
+      </p>
+
+      <h2>The Problem</h2>
+      <p>
+        On our most recent project, we've had the opportunity to work with Bluetooth Low Energy (BLE). 
+        Starting with BLE on Android and iOS is quite simple, but more complex use cases often led us to 
+        problems, if not addressed properly. Our app needed to be robust regarding the BLE connection and 
+        ensure that BLE operations are executed synchronously.
+      </p>
+      <p>
+        We would like to show you some issues we stumbled upon and the solutions we came up with. As an 
+        example, we'll use the OTA (over the air) firmware update functionality. This process is usually 
+        time-consuming and contains multiple interdependent operations.
+      </p>
+      <p>
+        In our case, to perform such an update, we had to read the device's status to see if it's ready 
+        to receive the update, subscribe to status characteristic, start sending multiple data chunks 
+        depending on status received, and unsubscribe when complete status is received. Any other 
+        non-related operations should not interfere with the update process.
+      </p>
+
+      <pre><code>{`connect(onComplete: {
+    authorize(onComplete: {
+        // OTA
+        readPeripheralStatus(onComplete: {
+            if peripheral is ready for update {
+                subscribeToPeripheralStatus(onNext: {
+                    if peripheral is ready for next write {
+                        writeNextDataChunk()
+                    } else if OTA is completed {
+                        unsubscribeFromPeripheralStatus()
+                        disconnect()
+                    }
+                })
+                writeNextDataChunk()
+            }
+        })
+        
+        // Non related write operation
+        write(onComplete: {
+            disconnect()
+        })
+    })
+})`}</code></pre>
+
+      <p>
+        Let's state the obvious. The pseudocode is too complex and adding any new functionalities (e.g. retry, 
+        timeout) will make it even worse. We could identify multiple issues with the way it's written but that 
+        wouldn't be the main problem.
+      </p>
+      <p>
+        Scheduling simple read and write operations is usually handled by many Bluetooth libraries, but as soon 
+        as we had to deal with operations that are dependent on each other, those libraries were not enough.
+      </p>
+      <p>
+        Remember, the callbacks are asynchronous which means, while we wait for them to complete, other parts 
+        of our code might be performing their own Bluetooth operations. As the code grows, you lose track of 
+        what and when it happens.
+      </p>
+      <p>
+        <strong>Can you find the bug in our simple example?</strong> The nonrelated write operation will be 
+        executed immediately after the peripheral status read operation. Interfering of nonrelated operations 
+        could easily happen in large and less straightforward apps or in apps in which these operations are 
+        invoked by UI components.
+      </p>
+
+      <h2>Our Solution (Command + Queue)</h2>
+      <p>
+        The central component of our solution is the command queue.
+      </p>
+      <blockquote style={{ 
+        borderLeft: '3px solid var(--accent-primary)', 
+        paddingLeft: '20px', 
+        marginLeft: 0,
+        fontStyle: 'italic',
+        color: 'var(--text-secondary)'
+      }}>
+        Command is a design pattern that turns a request into a stand-alone object that contains all 
+        information about the request.
+      </blockquote>
+      <p>
+        This transformation lets us queue and schedule each request's execution. By changing simple commands 
+        that are mutually dependent into more complex ones, we can ensure the overall execution order and 
+        improved robustness.
+      </p>
+      <p>
+        In our example, the minimum requirement for an object to be a Command is to conform to the Command interface.
+      </p>
+
+      <pre><code>{`interface Command { 
+    function execute() 
+}`}</code></pre>
+
+      <p>
+        The queue executes each command when the previous one finishes so there is no more fear of asynchronous 
+        operation interfering with one another and therefore no need for nested callbacks at the point of use. 
+        Methods calls can now be simply written in the order in which we want them executed. If a command depends 
+        on the result of the previous one, you should consider making a new one that will encapsulate them both.
+      </p>
+      <p>
+        Furthermore, the concerns are now separated as each of the operations is managed by its own command. 
+        Our code might now look like this:
+      </p>
+
+      <pre><code>{`queue.add(ConnectCommand())
+queue.add(AuthorizationCommand())
+queue.add(OTAUpdateCommand())
+queue.add(DisconnectCommand())`}</code></pre>
+
+      <p>
+        Introducing new commands is quite easy and shouldn't ever break the code you already have. Many of these 
+        commands can be written using generics which can significantly reduce code redundancy.
+      </p>
+
+      <h2>More Opportunities</h2>
+
+      <h3>Retry and Timeout</h3>
+      <p>
+        By introducing the <strong>Proxy</strong> pattern to our solution, we can enhance the functionalities 
+        of existing commands. For example, limiting execution time or retry mechanism can be easily applied. 
+        This was especially useful in solving unstable BLE connection problems.
+      </p>
+
+      <pre><code>{`var command = SomeRandomCommand()
+var timeoutCommand = TimeoutCommand(command)
+var retryTimeoutCommand = RetryCommand(timeoutCommand)
+
+queue.add(retryTimeoutCommand)`}</code></pre>
+
+      <h3>Auto Connection, Auto Authorization</h3>
+      <p>
+        You can also take advantage of the <strong>Decorator</strong> pattern when dealing with the command queue.
+      </p>
+      <p>
+        Let's say you need to execute some commands before or after every operation. Again, as an example, 
+        we can use OTA:
+      </p>
+
+      <pre><code>{`var queue = BasicCommandQueue()
+
+queue.add(ConnectionCommand())
+queue.add(AuthorizationCommand())
+queue.add(OTAUpdateCommand())
+queue.add(DisconnectCommand())`}</code></pre>
+
+      <p>
+        By introducing queue decorators, we can centralize the connection and authorization code in one place:
+      </p>
+
+      <pre><code>{`AuthorizeCommandQueue(commandQueue) {
+    var queue: BasicCommandQueue
+    
+    func add(command: Command) {
+        queue.add(AuthorizationCommand())
+        queue.add(command)
+    }
+}
+
+ConnectionCommandQueue(commandQueue) {
+    var queue: BasicCommandQueue
+    
+    func add(command: Command) {
+        queue.add(ConnectCommand())
+        queue.add(command)
+        queue.add(DisconnectCommand())
+    }
+}
+
+var commandQueue = BasicCommandQueue()
+var authorizeCommandQueue = AuthorizeCommandQueue(commandQueue)
+var connectionCommandQueue = ConnectionCommandQueue(authorizeCommandQueue)`}</code></pre>
+
+      <p>
+        From now on, add new operations to the queue without dealing with connection and authorization because 
+        it's taken care of by the command queue decorators automatically.
+      </p>
+
+      <pre><code>{`connectionCommandQueue.add(OTAUpdateCommand())`}</code></pre>
+
+      <p>
+        And if for some reason we decide to disable or completely remove authorization from the system (change 
+        request for example), all we need to do is leave out the authorization queue decorator.
+      </p>
+
+      <h3>Cancel</h3>
+      <p>
+        One more command pattern feature was of great value for us. Commands that are queued can be canceled. 
+        We've implemented it by creating a Cancelable interface with just the cancel() method.
+      </p>
+
+      <pre><code>{`cancelableCommand = OTAUpdateCommand() // conforms to Cancelable 
+queue.add(cancelableCommand)
+
+// …
+cancelableCommand.cancel()`}</code></pre>
+
+      <h2>To Sum Up</h2>
+      <p>
+        Proposed solutions benefited us in many ways. We would definitely recommend it if your app requires 
+        even a bit more complex operations. If your app's requirements change or the firmware guy decides to 
+        add an extra cool feature, you'll be glad you're all set and ready.
+      </p>
+      <p>
+        For those of you who are developing for Android and iOS, we prepared some sample code that should help 
+        you get things started.
+      </p>
+
+      <h3>Further Reading</h3>
+      <ul>
+        <li>Command Pattern</li>
+        <li>Proxy Pattern</li>
+        <li>Decorator Pattern</li>
+        <li>BLE - An Overview</li>
+        <li>Bluetooth Low Energy: Essentials for Creating Software with Device to Smartphone Connectivity</li>
+      </ul>
+    </>
   ),
 };
 

@@ -1426,10 +1426,16 @@ a.cv-contact-item:hover {
 
 .project-card-header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 16px;
+  gap: 12px;
   margin-bottom: 16px;
+}
+
+.project-card-header h3 {
+  flex: 1 1 auto;
+  min-width: 200px;
 }
 
 .project-card-name {
