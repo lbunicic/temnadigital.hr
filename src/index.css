@@ -2298,8 +2298,7 @@ a.contact-value:hover {
 .blog-post-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(10, 10, 15, 0.95);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 15, 0.97);
   z-index: 2000;
   display: flex;
   align-items: center;
@@ -2307,6 +2306,8 @@ a.contact-value:hover {
   padding: 24px;
   animation: fadeIn 0.3s ease;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
 }
 
 .blog-post-modal {
@@ -2321,6 +2322,10 @@ a.contact-value:hover {
   animation: slideUp 0.3s ease;
   box-shadow: var(--shadow-lg);
   margin: auto;
+  transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 @keyframes slideUp {
