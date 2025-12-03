@@ -1,8 +1,8 @@
 function About() {
   const skills = [
-    { name: 'iOS (UIKit, SwiftUI)', level: 95 },
-    { name: 'RxSwift / Combine', level: 92 },
-    { name: 'SceneKit / SpriteKit', level: 88 },
+    { name: 'Flutter / Dart', level: 95 },
+    { name: 'iOS (UIKit, SwiftUI)', level: 92 },
+    { name: 'RxSwift / Combine', level: 88 },
     { name: 'CoreBluetooth / BLE', level: 90 },
     { name: 'CI/CD & Git', level: 87 },
     { name: 'Firebase & Cloud', level: 85 },
@@ -11,8 +11,8 @@ function About() {
   const services = [
     {
       icon: '◇',
-      title: 'iOS Development',
-      description: 'Native iOS applications using UIKit, SwiftUI, and modern Swift frameworks.',
+      title: 'Flutter Development',
+      description: 'Cross-platform mobile applications using Flutter and Dart for iOS and Android.',
     },
     {
       icon: '△',
@@ -21,8 +21,8 @@ function About() {
     },
     {
       icon: '○',
-      title: 'SDK & Hardware',
-      description: 'Building robust SDKs, BLE integration, and hardware-software solutions.',
+      title: 'iOS & Native Dev',
+      description: 'Native iOS with UIKit/SwiftUI, BLE integration, and platform-specific solutions.',
     },
     {
       icon: '□',
@@ -44,20 +44,21 @@ function About() {
         <div className="about-content">
           <div className="about-text">
             <p className="about-lead">
-              I'm Lovro, a Senior iOS Engineer at most.io, working on aviation retail and PCI-compliant fintech 
-              solutions. With over 7 years of experience, I specialize in building high-quality native iOS 
-              applications for enterprise-scale systems.
+              I'm Lovro, a Senior Flutter Engineer at most.io, working on aviation retail and PCI-compliant 
+              fintech solutions. With over 7 years of experience, I specialize in building high-quality 
+              cross-platform and native mobile applications for enterprise-scale systems.
             </p>
             <p>
-              Currently at most.io, I'm building payment and retail platforms used by 28,000+ airline crew 
-              members across 1,000+ aircrafts, serving 160M+ passengers globally. Our clients include Southwest 
-              Airlines, Play, Hawaiian Airlines, and other major carriers.
+              Currently at most.io, I'm building Flutter-based payment and retail platforms used by 28,000+ 
+              airline crew members across 1,000+ aircrafts, serving 160M+ passengers globally. Our clients 
+              include Southwest Airlines, Play, Hawaiian Airlines, and other major carriers.
             </p>
             <p>
-              My expertise spans the entire iOS ecosystem—from UIKit and SwiftUI to advanced frameworks like 
-              CoreBluetooth, SceneKit, and RxSwift. I've led projects for major telecom companies, built 
-              BLE SDKs for medical devices, and developed secure payment systems. I'm passionate about clean 
-              architecture, automated testing, and delivering solutions that make a real impact.
+              My expertise spans Flutter/Dart and the iOS ecosystem—from Flutter widgets to native UIKit and 
+              SwiftUI, including advanced frameworks like CoreBluetooth, SceneKit, and RxSwift. I've led 
+              projects for major telecom companies, built BLE SDKs for medical devices, and developed secure 
+              payment systems. I'm passionate about clean architecture, automated testing, and delivering 
+              solutions that make a real impact.
             </p>
           </div>
 

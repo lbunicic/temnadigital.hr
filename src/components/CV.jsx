@@ -11,13 +11,13 @@ function CV() {
 
   const experience = [
     {
-      title: "Senior iOS Engineer",
+      title: "Senior Flutter Engineer",
       company: "most.io (Aviation Retail & PCI Fintech)",
       period: "2024 - Present",
       highlights: [
-        "Building payment and retail solutions for aviation industry",
+        "Building cross-platform payment and retail solutions for aviation industry",
         "Working with PCI-compliant fintech systems for airline transactions",
-        "iOS development for mobile retail platforms used by 28,000+ airline crew",
+        "Flutter development for mobile retail platforms used by 28,000+ airline crew",
         "Supporting 1,000+ aircrafts and 160M+ passengers globally",
         "Clients include Southwest Airlines, Play, Hawaiian Airlines, and more",
       ],

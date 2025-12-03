@@ -22,8 +22,8 @@ function Hero({ onNavigate }) {
         </h1>
         
         <p className="hero-description">
-          Senior iOS Engineer at most.io — building PCI-compliant payment and retail solutions 
-          for the aviation industry, serving 160M+ passengers across major airlines worldwide.
+          Senior Flutter Engineer at most.io — building cross-platform, PCI-compliant payment and 
+          retail solutions for the aviation industry, serving 160M+ passengers across major airlines worldwide.
         </p>
         
         <div className="hero-cta">
