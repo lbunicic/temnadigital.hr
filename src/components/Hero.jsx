@@ -27,7 +27,7 @@ function Hero({ onNavigate }) {
         </p>
         
         <div className="hero-cta">
-          <button className="btn btn-primary" onClick={() => onNavigate('cv')}>
+          <button className="btn btn-primary" onClick={() => onNavigate('projects')}>
             View My Work
             <span className="btn-arrow">→</span>
           </button>

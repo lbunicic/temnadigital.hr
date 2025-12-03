@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
+import Projects from './components/Projects';
 import CV from './components/CV';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
@@ -13,7 +14,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'cv', 'blog', 'contact'];
+      const sections = ['home', 'about', 'projects', 'cv', 'blog', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -51,6 +52,7 @@ function App() {
       <main>
         <Hero onNavigate={scrollToSection} />
         <About />
+        <Projects />
         <CV />
         <Blog />
         <Contact />

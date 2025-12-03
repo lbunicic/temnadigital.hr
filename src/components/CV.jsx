@@ -68,88 +68,13 @@ function CV() {
     },
   ];
 
-  const projects = [
-    {
-      name: "Bluetooth (BLE) SDK for a medical device",
-      highlights: [
-        "Helped design the public API for the SDK",
-        "Implemented the SDK",
-        "Designed and implemented a robust Over The Air (OTA) firmware update mechanism",
-        "Delivered the product via private cocoapod spec",
-        "Wrote about architectural challenges in a blog post",
-      ],
-      technologies: ["Bluetooth", "OTA", "Cocoapods", "CoreBluetooth"],
-      link: "http://tinyurl.com/ble-blogpost",
-    },
-    {
-      name: "UFO Tracking app",
-      rating: "4.8 ★, 2.1k Ratings",
-      highlights: [
-        "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
-        "Identified and resolved multiple performance issues",
-      ],
-      technologies: ["SwiftUI", "MapKit", "Sentry", "Segment", "SpriteKit", "GraphQL"],
-      link: "https://tinyurl.com/enigma-ios",
-    },
-    {
-      name: "Mindfulness app",
-      highlights: [
-        "Led the project development (architecture setup, style guide, code reviews etc.)",
-        "Communicated deadlines, bottlenecks, estimates to both the team and the clients",
-        "Supervised backend development",
-        "Implemented advanced SwiftUI animations",
-        "Implemented 3D UI with SceneKit, integrated it with SwiftUI",
-        "Worked with 3D Assets Team to identify and resolve performance issues",
-      ],
-      technologies: ["SwiftUI", "SceneKit"],
-    },
-    {
-      name: "Mobile App for a Major Telecom",
-      highlights: [
-        "Helped with app development",
-        "Implemented server driven UI for subscription tier based screens",
-      ],
-      technologies: ["UIKit", "Server driven UI"],
-    },
-    {
-      name: "Gaming Arena Reservation iPad Application",
-      highlights: [
-        "Helped resolving backend - client integration issues by introducing Clean Architecture concepts",
-        "Helped implement Square payments",
-        "Implemented custom and complex layouts for seat reservation calendar",
-      ],
-      technologies: ["RxSwift", "Clean Architecture", "iPadOS", "WebSockets", "Sentry", "Bitrise"],
-    },
-    {
-      name: "Smart Lab Monitoring (IOT)",
-      highlights: [
-        "Developed a simple app that included sensor data monitoring and push notifications",
-      ],
-      technologies: ["UIKit", "Firebase Cloud Messaging"],
-    },
-    {
-      name: "HSKIKI26 (freelance project)",
-      highlights: [
-        "Developed native Android and iOS conference itinerary applications for Croatian Meeting of Chemists and Chemical Engineers",
-      ],
-      technologies: ["UIKit"],
-    },
-    {
-      name: "Nova Eva (freelance project)",
-      rating: "4.9 ★, 95 ratings",
-      highlights: ["Maintaining the app since 2020"],
-      technologies: ["UIKit"],
-      link: "https://tinyurl.com/nova-eva",
-    },
-  ];
-
   return (
     <section id="cv" className="cv-section">
       <div className="section-container">
         <div className="section-header">
-          <span className="section-tag">Experience & Projects</span>
+          <span className="section-tag">Curriculum Vitae</span>
           <h2 className="section-title">
-            Professional <span className="text-gradient">Journey</span> & Notable Work
+            Professional <span className="text-gradient">Experience</span> & Education
           </h2>
         </div>
 
@@ -220,45 +145,6 @@ function CV() {
                   <div className="cv-edu-footer">
                     <span className="cv-edu-location">{edu.location}</span>
                     <span className="cv-edu-period">{edu.period}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="cv-section-block projects-section">
-            <h2 className="cv-section-title">
-              <span className="cv-title-icon">□</span>
-              Notable Projects
-            </h2>
-            <p className="projects-subtitle">
-              A selection of key projects showcasing my expertise in mobile development, fintech, and complex system architecture
-            </p>
-            <div className="cv-projects-grid">
-              {projects.map((project, index) => (
-                <div key={index} className="cv-project-card">
-                  <div className="cv-project-header">
-                    <h3 className="cv-project-name">{project.name}</h3>
-                    {project.rating && (
-                      <span className="cv-project-rating">{project.rating}</span>
-                    )}
-                  </div>
-                  <ul className="cv-project-highlights">
-                    {project.highlights.map((highlight, idx) => (
-                      <li key={idx}>{highlight}</li>
-                    ))}
-                  </ul>
-                  <div className="cv-project-footer">
-                    <div className="cv-project-tech">
-                      {project.technologies.map((tech, idx) => (
-                        <span key={idx} className="cv-tech-tag">{tech}</span>
-                      ))}
-                    </div>
-                    {project.link && (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="cv-project-link">
-                        View →
-                      </a>
-                    )}
                   </div>
                 </div>
               ))}
