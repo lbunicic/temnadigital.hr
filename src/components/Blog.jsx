@@ -16,36 +16,6 @@ function Blog() {
       featured: false,
       fullPost: bleSdkPost,
     },
-    {
-      id: 3,
-      title: 'Flutter State Management: Patterns and Best Practices',
-      excerpt: 'A practical guide to managing state in Flutter applications, from Provider to Riverpod and beyond.',
-      category: 'Flutter',
-      date: 'Jul 20, 2024',
-      readTime: '14 min read',
-      featured: false,
-      gradient: 'linear-gradient(135deg, #fc466b 0%, #3f5efb 100%)',
-    },
-    {
-      id: 4,
-      title: 'Building PCI-Compliant Payment Systems',
-      excerpt: 'Security considerations and architectural decisions when developing payment solutions for mobile platforms.',
-      category: 'Fintech',
-      date: 'May 10, 2024',
-      readTime: '11 min read',
-      featured: false,
-      gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-    },
-    {
-      id: 5,
-      title: 'SceneKit Integration with SwiftUI',
-      excerpt: 'Bringing 3D experiences to SwiftUI apps: techniques, performance tips, and real-world examples.',
-      category: 'iOS Development',
-      date: 'Mar 5, 2024',
-      readTime: '9 min read',
-      featured: false,
-      gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-    },
   ];
 
   const featuredPost = posts.find(p => p.featured);

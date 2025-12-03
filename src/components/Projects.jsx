@@ -14,6 +14,23 @@ function Projects() {
       link: "https://most.io/",
     },
     {
+      name: "UFO Tracking app",
+      rating: "4.8 ★, 2.1k Ratings",
+      highlights: [
+        "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
+        "Identified and resolved multiple performance issues",
+      ],
+      technologies: ["SwiftUI", "MapKit", "Sentry", "Segment", "SpriteKit", "GraphQL"],
+      link: "https://tinyurl.com/enigma-ios",
+    },
+    {
+      name: "Nova Eva (freelance project)",
+      rating: "4.9 ★, 108 ratings",
+      highlights: ["Maintaining the app since 2020"],
+      technologies: ["UIKit"],
+      link: "https://tinyurl.com/nova-eva",
+    },
+    {
       name: "Bluetooth (BLE) SDK for a medical device",
       nda: true,
       highlights: [
@@ -25,16 +42,6 @@ function Projects() {
       ],
       technologies: ["Bluetooth", "OTA", "Cocoapods", "CoreBluetooth"],
       link: "http://tinyurl.com/ble-blogpost",
-    },
-    {
-      name: "UFO Tracking app",
-      rating: "4.8 ★, 2.1k Ratings",
-      highlights: [
-        "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
-        "Identified and resolved multiple performance issues",
-      ],
-      technologies: ["SwiftUI", "MapKit", "Sentry", "Segment", "SpriteKit", "GraphQL"],
-      link: "https://tinyurl.com/enigma-ios",
     },
     {
       name: "Mindfulness app",
@@ -78,17 +85,11 @@ function Projects() {
     },
     {
       name: "HSKIKI26 (freelance project)",
+      nda: true,
       highlights: [
         "Developed native Android and iOS conference itinerary applications for Croatian Meeting of Chemists and Chemical Engineers",
       ],
       technologies: ["UIKit"],
-    },
-    {
-      name: "Nova Eva (freelance project)",
-      rating: "4.9 ★, 95 ratings",
-      highlights: ["Maintaining the app since 2020"],
-      technologies: ["UIKit"],
-      link: "https://tinyurl.com/nova-eva",
     },
   ];
 
