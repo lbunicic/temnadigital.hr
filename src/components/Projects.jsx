@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { 
   AviationPaymentGraphic, 
   UFOGraphic, 
@@ -11,9 +12,15 @@ import {
 } from './ProjectGraphics';
 
 function Projects() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedTech, setSelectedTech] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
   const projects = [
     {
       name: "most.io - Aviation Retail Platform",
+      category: "Fintech",
+      year: 2024,
       graphic: <AviationPaymentGraphic />,
       stats: "160M+ Passengers • 28K+ Crew • 1K+ Aircrafts",
       highlights: [
@@ -28,6 +35,8 @@ function Projects() {
     },
     {
       name: "UFO Tracking app",
+      category: "Entertainment",
+      year: 2023,
       graphic: <UFOGraphic />,
       rating: "4.8 ★, 4.8k Ratings",
       highlights: [
@@ -39,6 +48,8 @@ function Projects() {
     },
     {
       name: "Nova Eva (freelance project)",
+      category: "Lifestyle",
+      year: 2020,
       graphic: <MobileAppGraphic />,
       rating: "4.9 ★, 108 ratings",
       highlights: ["Maintaining the app since 2020"],
@@ -47,6 +58,8 @@ function Projects() {
     },
     {
       name: "Bluetooth (BLE) SDK for a medical device",
+      category: "Healthcare",
+      year: 2022,
       graphic: <BluetoothDeviceGraphic />,
       nda: true,
       highlights: [
@@ -61,6 +74,8 @@ function Projects() {
     },
     {
       name: "Mindfulness app",
+      category: "Healthcare",
+      year: 2023,
       graphic: <MindfulnessGraphic />,
       nda: true,
       highlights: [
@@ -75,6 +90,8 @@ function Projects() {
     },
     {
       name: "Mobile App for a Major Telecom",
+      category: "Telecom",
+      year: 2022,
       graphic: <TelecomGraphic />,
       nda: true,
       highlights: [
@@ -85,6 +102,8 @@ function Projects() {
     },
     {
       name: "Gaming Arena Reservation iPad Application",
+      category: "Entertainment",
+      year: 2021,
       graphic: <GamingArenaGraphic />,
       nda: true,
       highlights: [
@@ -96,6 +115,8 @@ function Projects() {
     },
     {
       name: "Smart Lab Monitoring (IOT)",
+      category: "IoT",
+      year: 2020,
       graphic: <IoTGraphic />,
       nda: true,
       highlights: [
@@ -105,6 +126,8 @@ function Projects() {
     },
     {
       name: "HSKIKI26 (freelance project)",
+      category: "Events",
+      year: 2019,
       graphic: <ConferenceGraphic />,
       nda: true,
       highlights: [
@@ -113,6 +136,29 @@ function Projects() {
       technologies: ["UIKit"],
     },
   ];
+
+  // Get unique technologies and categories
+  const allTechnologies = ['all', ...new Set(projects.flatMap(p => p.technologies))];
+  const allCategories = ['all', ...new Set(projects.map(p => p.category))];
+
+  // Filter projects
+  const filteredProjects = projects.filter(project => {
+    const matchesSearch = searchQuery === '' || 
+      project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.highlights.some(h => h.toLowerCase().includes(searchQuery.toLowerCase())) ||
+      project.technologies.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+    
+    const matchesTech = selectedTech === 'all' || project.technologies.includes(selectedTech);
+    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
+    
+    return matchesSearch && matchesTech && matchesCategory;
+  });
+
+  const resetFilters = () => {
+    setSearchQuery('');
+    setSelectedTech('all');
+    setSelectedCategory('all');
+  };
 
   return (
     <section id="projects" className="projects">
@@ -127,8 +173,71 @@ function Projects() {
           </p>
         </div>
 
+        {/* Search and Filters */}
+        <div className="projects-controls">
+          <div className="projects-search">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
+              <path d="M21 21L16.65 16.65" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+            </svg>
+            <input
+              type="text"
+              placeholder="Search projects, technologies, or keywords..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+            {searchQuery && (
+              <button className="search-clear" onClick={() => setSearchQuery('')}>×</button>
+            )}
+          </div>
+
+          <div className="projects-filters">
+            <select 
+              value={selectedCategory} 
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="filter-select"
+            >
+              <option value="all">All Categories</option>
+              {allCategories.filter(c => c !== 'all').map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+
+            <select 
+              value={selectedTech} 
+              onChange={(e) => setSelectedTech(e.target.value)}
+              className="filter-select"
+            >
+              <option value="all">All Technologies</option>
+              {allTechnologies.filter(t => t !== 'all').sort().map(tech => (
+                <option key={tech} value={tech}>{tech}</option>
+              ))}
+            </select>
+
+            {(searchQuery || selectedTech !== 'all' || selectedCategory !== 'all') && (
+              <button className="reset-filters-btn" onClick={resetFilters}>
+                Reset Filters
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Results count */}
+        <div className="projects-count">
+          Showing <strong>{filteredProjects.length}</strong> of <strong>{projects.length}</strong> projects
+        </div>
+
         <div className="projects-grid">
-          {projects.map((project, index) => (
+          {filteredProjects.length === 0 ? (
+            <div className="no-results">
+              <span className="no-results-icon">🔍</span>
+              <h3>No projects found</h3>
+              <p>Try adjusting your search or filters</p>
+              <button className="btn btn-secondary" onClick={resetFilters}>Clear Filters</button>
+            </div>
+          ) : (
+            filteredProjects.map((project, index) => (
             <article key={index} className="project-card">
               {project.graphic && (
                 <div className="project-card-graphic">
@@ -167,7 +276,8 @@ function Projects() {
                 )}
               </div>
             </article>
-          ))}
+            ))
+          )}
         </div>
       </div>
     </section>

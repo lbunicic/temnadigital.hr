@@ -1373,6 +1373,36 @@ input, textarea {
   padding: var(--section-padding) 0;
 }
 
+.download-cv-btn {
+  margin: 24px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: var(--radius-md);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px var(--accent-glow);
+}
+
+.download-cv-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-glow);
+}
+
+.download-cv-btn svg {
+  transition: transform var(--transition-fast);
+}
+
+.download-cv-btn:hover svg {
+  transform: translateY(2px);
+}
+
 .cv-content {
   max-width: 1000px;
   margin: 0 auto;
@@ -1660,6 +1690,157 @@ a.cv-contact-item:hover {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
   opacity: 0.3;
+}
+
+/* Projects Controls */
+.projects-controls {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.projects-search {
+  position: relative;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.projects-search svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 16px 50px 16px 52px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.search-input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 1;
+  transition: all var(--transition-fast);
+}
+
+.search-clear:hover {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.projects-filters {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.filter-select {
+  padding: 12px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-width: 180px;
+}
+
+.filter-select:hover {
+  border-color: var(--accent-primary);
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.reset-filters-btn {
+  padding: 12px 24px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.reset-filters-btn:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+}
+
+.projects-count {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.projects-count strong {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* No results */
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.no-results-icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 24px;
+  opacity: 0.5;
+}
+
+.no-results h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.no-results p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
 }
 
 .projects-grid {
@@ -2045,6 +2226,18 @@ a.cv-contact-item:hover {
 @media (max-width: 1024px) {
   .projects-grid {
     grid-template-columns: 1fr;
+  }
+
+  .projects-filters {
+    flex-direction: column;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .search-input {
+    font-size: 16px; /* Prevents zoom on iOS */
   }
 }
 
