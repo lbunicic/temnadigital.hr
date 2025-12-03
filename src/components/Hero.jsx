@@ -1,12 +1,10 @@
-import ShaderBackground from './ShaderBackground';
-import ParticleField from './ParticleField';
-
 function Hero({ onNavigate }) {
   return (
     <section id="home" className="hero">
       <div className="hero-bg">
-        <ShaderBackground />
-        <ParticleField className="hero-particles" />
+        <div className="hero-gradient"></div>
+        <div className="hero-grid"></div>
+        <div className="hero-glow"></div>
       </div>
       
       <div className="hero-content">
@@ -65,3 +63,4 @@ function Hero({ onNavigate }) {
 }
 
 export default Hero;
+
