@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 function Navbar({ activeSection, onNavigate }) {
   const [scrolled, setScrolled] = useState(false);
@@ -58,6 +59,7 @@ function Navbar({ activeSection, onNavigate }) {
             </li>
           ))}
         </ul>
+        <ThemeToggle />
       </div>
     </nav>
   );
