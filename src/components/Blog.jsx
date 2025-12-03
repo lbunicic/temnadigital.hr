@@ -2,51 +2,53 @@ function Blog() {
   const posts = [
     {
       id: 1,
-      title: 'The Future of Web Development: What to Expect in 2025',
-      excerpt: 'Exploring emerging trends, technologies, and paradigms that will shape how we build for the web.',
-      category: 'Technology',
-      date: 'Dec 1, 2025',
-      readTime: '8 min read',
+      title: 'Type-Driven Design: Safer Software for Complex Domains',
+      excerpt: 'Exploring how leveraging strong type systems can help us build more reliable, maintainable software for complex business domains. A deep dive into type-driven design principles.',
+      category: 'Software Engineering',
+      date: 'Oct 22, 2025',
+      readTime: '12 min read',
       featured: true,
       gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+      link: 'https://medium.com/@lovro.bunicic/type-driven-design-6412f29e3d5d',
     },
     {
       id: 2,
-      title: 'Building Accessible React Applications',
-      excerpt: 'A comprehensive guide to creating inclusive user experiences that work for everyone.',
-      category: 'Development',
-      date: 'Nov 24, 2025',
-      readTime: '12 min read',
+      title: 'Architectural Challenges in BLE SDK Development',
+      excerpt: 'Lessons learned from building a Bluetooth Low Energy SDK for medical devices, including OTA updates and API design.',
+      category: 'Mobile Development',
+      date: 'Sep 15, 2024',
+      readTime: '10 min read',
       featured: false,
       gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+      link: 'http://tinyurl.com/ble-blogpost',
     },
     {
       id: 3,
-      title: 'Design Systems: From Concept to Implementation',
-      excerpt: 'How to create and maintain a design system that scales with your organization.',
-      category: 'Design',
-      date: 'Nov 15, 2025',
-      readTime: '10 min read',
+      title: 'Flutter State Management: Patterns and Best Practices',
+      excerpt: 'A practical guide to managing state in Flutter applications, from Provider to Riverpod and beyond.',
+      category: 'Flutter',
+      date: 'Jul 20, 2024',
+      readTime: '14 min read',
       featured: false,
       gradient: 'linear-gradient(135deg, #fc466b 0%, #3f5efb 100%)',
     },
     {
       id: 4,
-      title: 'The Art of Clean Code Architecture',
-      excerpt: 'Principles and patterns for writing maintainable, scalable, and elegant code.',
-      category: 'Development',
-      date: 'Nov 8, 2025',
-      readTime: '15 min read',
+      title: 'Building PCI-Compliant Payment Systems',
+      excerpt: 'Security considerations and architectural decisions when developing payment solutions for mobile platforms.',
+      category: 'Fintech',
+      date: 'May 10, 2024',
+      readTime: '11 min read',
       featured: false,
       gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     },
     {
       id: 5,
-      title: 'Client Communication: A Developer\'s Guide',
-      excerpt: 'Essential soft skills and strategies for successful client relationships.',
-      category: 'Business',
-      date: 'Oct 30, 2025',
-      readTime: '6 min read',
+      title: 'SceneKit Integration with SwiftUI',
+      excerpt: 'Bringing 3D experiences to SwiftUI apps: techniques, performance tips, and real-world examples.',
+      category: 'iOS Development',
+      date: 'Mar 5, 2024',
+      readTime: '9 min read',
       featured: false,
       gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     },
@@ -82,7 +84,12 @@ function Blog() {
                 </div>
                 <h3 className="blog-title">{featuredPost.title}</h3>
                 <p className="blog-excerpt">{featuredPost.excerpt}</p>
-                <a href="#" className="blog-link">
+                <a 
+                  href={featuredPost.link || '#'} 
+                  target={featuredPost.link ? '_blank' : '_self'}
+                  rel={featuredPost.link ? 'noopener noreferrer' : ''}
+                  className="blog-link"
+                >
                   Read Article
                   <span className="link-arrow">→</span>
                 </a>
@@ -103,7 +110,12 @@ function Blog() {
                   <p className="blog-excerpt">{post.excerpt}</p>
                   <div className="blog-footer">
                     <span className="blog-read-time">{post.readTime}</span>
-                    <a href="#" className="blog-link">
+                    <a 
+                      href={post.link || '#'} 
+                      target={post.link ? '_blank' : '_self'}
+                      rel={post.link ? 'noopener noreferrer' : ''}
+                      className="blog-link"
+                    >
                       Read →
                     </a>
                   </div>
