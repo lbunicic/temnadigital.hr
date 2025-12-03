@@ -1,3 +1,5 @@
+import { TypeDrivenGraphic, BluetoothGraphic } from '../components/BlogGraphics';
+
 export const typeDrivenDesignPost = {
   id: 'type-driven-design',
   title: 'Type-Driven Design: Safer Software for Complex Domains',
@@ -6,7 +8,7 @@ export const typeDrivenDesignPost = {
   date: 'Oct 22, 2025',
   readTime: '12 min read',
   author: 'Lovro Buničić',
-  gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  graphic: <TypeDrivenGraphic />,
   originalLink: 'https://medium.com/@lovro.bunicic/type-driven-design-6412f29e3d5d',
   content: (
     <>
@@ -278,7 +280,7 @@ export const bleSdkPost = {
   date: 'Jan 27, 2021',
   readTime: '10 min read',
   author: 'Lovro Buničić & Josip Grubeša',
-  gradient: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
+  graphic: <BluetoothGraphic />,
   originalLink: 'https://arsfutura.com/blog/solving-architectural-problems-in-bluetooth-low-energy-mobile-apps',
   content: (
     <>

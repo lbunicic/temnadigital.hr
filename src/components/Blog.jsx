@@ -37,7 +37,8 @@ function Blog() {
         <div className="blog-grid">
           {featuredPost && (
             <article className="blog-card featured">
-              <div className="blog-image" style={{ background: featuredPost.gradient }}>
+              <div className="blog-image">
+                {featuredPost.graphic}
                 <span className="blog-category">{featuredPost.category}</span>
               </div>
               <div className="blog-content">
@@ -62,7 +63,9 @@ function Blog() {
           <div className="blog-list">
             {regularPosts.map((post) => (
               <article key={post.id} className="blog-card compact">
-                <div className="blog-accent" style={{ background: post.gradient }}></div>
+                <div className="blog-graphic-small">
+                  {post.graphic}
+                </div>
                 <div className="blog-content">
                   <div className="blog-meta">
                     <span className="blog-category-tag">{post.category}</span>
