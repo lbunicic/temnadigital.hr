@@ -763,6 +763,27 @@ input, textarea {
   line-height: 1.8;
 }
 
+/* Gradient highlight/underline for key info */
+.gradient-highlight {
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 4px;
+  border: none;
+}
+
+.gradient-highlight::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 50%, #c084fc 100%);
+  border-radius: 1px;
+}
+
 .about-skills h3 {
   font-size: 1.25rem;
   margin-bottom: 24px;
