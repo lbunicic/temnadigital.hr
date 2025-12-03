@@ -29,10 +29,13 @@ function Hero({ onNavigate }) {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Animated counters
+  // Animated counters - start only after name animation completes
   useEffect(() => {
     const duration = 2000; // 2 seconds
-    const startDelay = 1200; // Start after name animation
+    const typingStartDelay = 600; // When typing starts
+    const typingDuration = fullName.length * 150; // Time to type all letters
+    const pauseAfterName = 400; // Small pause after name finishes
+    const startDelay = typingStartDelay + typingDuration + pauseAfterName;
     
     const timeout = setTimeout(() => {
       const startTime = Date.now();
