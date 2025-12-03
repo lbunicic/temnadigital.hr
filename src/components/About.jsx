@@ -1,33 +1,33 @@
 function About() {
   const skills = [
-    { name: 'React / Next.js', level: 95 },
-    { name: 'Node.js / Express', level: 90 },
-    { name: 'TypeScript', level: 88 },
-    { name: 'UI/UX Design', level: 85 },
-    { name: 'Flutter / Dart', level: 82 },
-    { name: 'Cloud & DevOps', level: 80 },
+    { name: 'iOS (UIKit, SwiftUI)', level: 95 },
+    { name: 'RxSwift / Combine', level: 92 },
+    { name: 'SceneKit / SpriteKit', level: 88 },
+    { name: 'CoreBluetooth / BLE', level: 90 },
+    { name: 'CI/CD & Git', level: 87 },
+    { name: 'Firebase & Cloud', level: 85 },
   ];
 
   const services = [
     {
       icon: '◇',
-      title: 'Web Development',
-      description: 'Modern, responsive websites and web applications built with cutting-edge technologies.',
+      title: 'iOS Development',
+      description: 'Native iOS applications using UIKit, SwiftUI, and modern Swift frameworks.',
     },
     {
       icon: '△',
-      title: 'Mobile Apps',
-      description: 'Cross-platform mobile applications that deliver native-like experiences.',
+      title: 'SDK Development',
+      description: 'Building robust SDKs and frameworks, including BLE and hardware integration.',
     },
     {
       icon: '○',
-      title: 'Digital Strategy',
-      description: 'Strategic consulting to help your business thrive in the digital landscape.',
+      title: 'Team Leadership',
+      description: 'Mentoring developers, conducting interviews, and fostering team collaboration.',
     },
     {
       icon: '□',
-      title: 'Brand Identity',
-      description: 'Crafting unique visual identities that resonate with your target audience.',
+      title: 'Architecture & CI/CD',
+      description: 'Clean architecture patterns, testing strategies, and automated deployment pipelines.',
     },
   ];
 
@@ -44,18 +44,18 @@ function About() {
         <div className="about-content">
           <div className="about-text">
             <p className="about-lead">
-              I'm Lovro, founder of Temna Digital — a creative development studio based in the heart of Europe. 
-              With over 5 years of experience in the digital space, I've helped businesses transform their ideas 
-              into powerful digital products.
+              I'm Lovro, a Senior iOS Engineer and Team Lead at Ars Futura. With over 7 years of experience, 
+              I specialize in building high-quality native iOS applications and leading development teams.
             </p>
             <p>
-              My approach combines technical excellence with creative thinking. I believe that great software 
-              isn't just about code—it's about understanding people, solving real problems, and delivering 
-              experiences that feel effortless and delightful.
+              My expertise spans the entire iOS ecosystem—from UIKit and SwiftUI to advanced frameworks like 
+              CoreBluetooth, SceneKit, and RxSwift. I've led projects for major telecom companies, built 
+              BLE SDKs for medical devices, and developed apps that serve thousands of users daily.
             </p>
             <p>
-              When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
-              projects, or sharing knowledge with the developer community.
+              As a Team Lead, I mentor junior and mid-level developers, conduct technical interviews, and 
+              foster cross-team collaboration. I'm passionate about clean architecture, automated testing, 
+              and sharing knowledge with the developer community.
             </p>
           </div>
 

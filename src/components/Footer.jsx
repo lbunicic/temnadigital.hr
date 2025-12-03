@@ -12,6 +12,7 @@ function Footer() {
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
     { name: 'Portfolio', href: '#portfolio' },
+    { name: 'CV', href: '#cv' },
     { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
   ];

@@ -3,62 +3,65 @@ import { useState } from 'react';
 function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const filters = ['all', 'web', 'mobile', 'branding'];
+  const filters = ['all', 'mobile'];
 
   const projects = [
     {
       id: 1,
-      title: 'Nexus Finance',
-      category: 'web',
-      description: 'A modern fintech dashboard with real-time analytics and intuitive UX.',
-      tags: ['React', 'Node.js', 'PostgreSQL'],
+      title: 'UFO Tracking App',
+      category: 'mobile',
+      description: 'Refactored legacy codebase, set up modern architecture, and delivered to App Store. Resolved critical performance issues. 4.8★ rating with 2.1k reviews.',
+      tags: ['SwiftUI', 'MapKit', 'Sentry', 'GraphQL'],
       image: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
       featured: true,
+      link: 'https://tinyurl.com/enigma-ios',
     },
     {
       id: 2,
-      title: 'Pulse Health',
+      title: 'Mindfulness App',
       category: 'mobile',
-      description: 'Cross-platform health tracking app with AI-powered insights.',
-      tags: ['Flutter', 'Firebase', 'ML Kit'],
+      description: 'Led complete project development including architecture setup, style guide, and code reviews. Implemented advanced SwiftUI animations and 3D UI with SceneKit integration.',
+      tags: ['SwiftUI', 'SceneKit', '3D UI'],
       image: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
       featured: true,
     },
     {
       id: 3,
-      title: 'Aurora Brand',
-      category: 'branding',
-      description: 'Complete brand identity for a sustainable fashion startup.',
-      tags: ['Brand Strategy', 'Visual Design', 'Guidelines'],
+      title: 'BLE SDK for Medical Device',
+      category: 'mobile',
+      description: 'Designed and implemented public API, built robust OTA firmware update mechanism, delivered via private CocoaPods. Wrote technical blog post about challenges.',
+      tags: ['Bluetooth', 'CoreBluetooth', 'OTA', 'SDK'],
       image: 'linear-gradient(135deg, #fc466b 0%, #3f5efb 100%)',
       featured: false,
+      link: 'http://tinyurl.com/ble-blogpost',
     },
     {
       id: 4,
-      title: 'Orbit CRM',
-      category: 'web',
-      description: 'Enterprise CRM solution with advanced automation features.',
-      tags: ['Next.js', 'GraphQL', 'AWS'],
+      title: 'Gaming Arena Reservation',
+      category: 'mobile',
+      description: 'iPad application with complex seat reservation calendar. Integrated Square payments and implemented Clean Architecture patterns for better backend integration.',
+      tags: ['RxSwift', 'iPadOS', 'WebSockets'],
       image: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
       featured: false,
     },
     {
       id: 5,
-      title: 'Mindful',
+      title: 'Major Telecom Mobile App',
       category: 'mobile',
-      description: 'Meditation and mindfulness app with personalized sessions.',
-      tags: ['React Native', 'Node.js', 'MongoDB'],
+      description: 'Developed server-driven UI for subscription tier based screens, enabling dynamic content without app updates.',
+      tags: ['UIKit', 'Server-Driven UI'],
       image: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
       featured: false,
     },
     {
       id: 6,
-      title: 'Vertex Studio',
-      category: 'branding',
-      description: 'Brand refresh for a creative agency focusing on digital experiences.',
-      tags: ['Logo Design', 'Typography', 'Web Design'],
+      title: 'Nova Eva',
+      category: 'mobile',
+      description: 'Freelance project maintained since 2020. 4.9★ rating with 95 reviews on App Store.',
+      tags: ['UIKit', 'iOS'],
       image: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
       featured: false,
+      link: 'https://tinyurl.com/nova-eva',
     },
   ];
 
@@ -99,7 +102,13 @@ function Portfolio() {
             >
               <div className="project-image" style={{ background: project.image }}>
                 <div className="project-overlay">
-                  <button className="project-link">View Project →</button>
+                  {project.link ? (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-link">
+                      View Project →
+                    </a>
+                  ) : (
+                    <span className="project-link project-link-disabled">NDA Project</span>
+                  )}
                 </div>
               </div>
               <div className="project-content">
