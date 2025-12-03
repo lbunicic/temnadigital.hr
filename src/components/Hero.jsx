@@ -88,8 +88,10 @@ function Hero({ onNavigate }) {
         </h1>
         
         <p className="hero-description">
-          Senior Flutter Engineer at most.io — building cross-platform, PCI-compliant payment and 
-          retail solutions for the aviation industry, serving 160M+ passengers across major airlines worldwide.
+          Senior Flutter Engineer at <span className="highlight-text">most.io</span> — building cross-platform, PCI-compliant payment and 
+          retail solutions for the aviation industry, used by <span className="highlight-text">28,000+ airline crew</span> across <span className="highlight-text">1,000+ aircrafts</span>, 
+          serving <span className="highlight-text">160M+ passengers</span> globally. Our clients include <span className="highlight-text">Southwest Airlines</span>, 
+          <span className="highlight-text">Play</span>, <span className="highlight-text">Hawaiian Airlines</span>, and other major carriers.
         </p>
         
         <div className="hero-cta">
