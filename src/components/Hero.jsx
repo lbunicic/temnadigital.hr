@@ -88,7 +88,7 @@ function Hero({ onNavigate }) {
         </h1>
         
         <p className="hero-description">
-          Senior Flutter Engineer at most.io — building cross-platform, PCI-compliant payment and 
+          Senior Software Engineer at most.io — building cross-platform, PCI-compliant payment and 
           retail solutions for the aviation industry, serving 160M+ passengers across major airlines worldwide.
         </p>
         
