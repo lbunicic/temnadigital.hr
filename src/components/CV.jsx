@@ -22,10 +22,10 @@ function CV() {
 
   const experience = [
     {
-      title: "Senior Flutter Engineer",
+      title: "Senior Software Engineer",
       company: "most.io",
       period: "2024 - Present",
-      description: "Aviation retail & PCI-compliant fintech solutions serving 160M+ passengers globally",
+      description: "Cross-platform, PCI-compliant payment and retail solutions for aviation, serving 160M+ passengers",
     },
     {
       title: "Senior iOS Engineer & Team Lead",

@@ -2,10 +2,7 @@ function Footer() {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { name: 'GitHub', icon: '◈', url: '#' },
-    { name: 'LinkedIn', icon: '◇', url: '#' },
-    { name: 'Twitter', icon: '○', url: '#' },
-    { name: 'Dribbble', icon: '△', url: '#' },
+    { name: 'LinkedIn', icon: '◇', url: 'https://www.linkedin.com/in/lovro-buni%C4%8Di%C4%87/' },
   ];
 
   const quickLinks = [
@@ -36,6 +33,8 @@ function Footer() {
                   href={link.url} 
                   className="social-link"
                   aria-label={link.name}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {link.icon}
                 </a>
@@ -52,15 +51,6 @@ function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="footer-newsletter">
-            <h4>Stay Updated</h4>
-            <p>Subscribe to get the latest articles and insights.</p>
-            <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="your@email.com" />
-              <button type="submit">→</button>
-            </form>
           </div>
         </div>
 

@@ -80,7 +80,7 @@ function Hero({ onNavigate }) {
           <span className="hero-greeting">Hello, I'm</span>
           <span className="hero-name">
             {displayedName}
-            <span className="typing-cursor">|</span>
+            <span className="typing-cursor"></span>
           </span>
           <span className="hero-tagline">
             Crafting <span className="highlight">digital experiences</span> that matter
@@ -88,8 +88,8 @@ function Hero({ onNavigate }) {
         </h1>
         
         <p className="hero-description">
-          Senior Software Engineer at most.io — building cross-platform, PCI-compliant payment and 
-          retail solutions for the aviation industry, serving 160M+ passengers across major airlines worldwide.
+          Senior Software Engineer with over 7 years of experience building high-quality mobile applications 
+          for enterprise-scale systems across fintech, healthcare, and telecom industries.
         </p>
         
         <div className="hero-cta">
