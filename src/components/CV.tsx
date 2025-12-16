@@ -1,6 +1,5 @@
-import profileImg from '../assets/profile.jpg';
-import cvPdf from '../assets/cv_bunicic.pdf';
 
+import cvPdf from '../assets/cv_bunicic.pdf';
 function CV() {
   const downloadPDF = () => {
     const link = document.createElement('a');

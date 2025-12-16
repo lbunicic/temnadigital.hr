@@ -1,16 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
 import profileImg from '../assets/profile.jpg';
 
-function MessageComposer({ isOpen, onClose, onSubmit }) {
+interface MessageComposerProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (message: string) => void;
+}
+
+function MessageComposer({ isOpen, onClose, onSubmit }: MessageComposerProps) {
   const [message, setMessage] = useState('');
   const [animationStage, setAnimationStage] = useState(0);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (isOpen) {
       // Reset message to start with "Hello, Lovro"
       setMessage('Hello, Lovro 👋');
-      
+
       // Animation stages
       setTimeout(() => setAnimationStage(1), 100);  // Show the morphing text
       setTimeout(() => setAnimationStage(2), 800);  // Transform into input
@@ -30,7 +36,7 @@ function MessageComposer({ isOpen, onClose, onSubmit }) {
     }
   }, [isOpen]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (message.trim() && message !== 'Hello, Lovro 👋') {
       onSubmit(message);
@@ -45,7 +51,7 @@ function MessageComposer({ isOpen, onClose, onSubmit }) {
     <div className="message-composer-overlay" onClick={onClose}>
       <div className="message-composer" onClick={(e) => e.stopPropagation()}>
         <button className="message-composer-close" onClick={onClose}>×</button>
-        
+
         <div className="message-composer-content">
           <div className="message-header">
             <div className="message-composer-avatar">
@@ -76,7 +82,7 @@ function MessageComposer({ isOpen, onClose, onSubmit }) {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Hello, Lovro 👋"
-                rows="6"
+                rows={6}
                 className="message-textarea"
               />
             </div>
@@ -92,14 +98,14 @@ function MessageComposer({ isOpen, onClose, onSubmit }) {
               />
             </div>
 
-            <button 
-              type="submit" 
-              className="message-send-btn-full" 
+            <button
+              type="submit"
+              className="message-send-btn-full"
               disabled={!message.trim() || message === 'Hello, Lovro 👋'}
             >
               Send Message
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
 

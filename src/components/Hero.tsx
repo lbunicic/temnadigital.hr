@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
 
-function Hero({ onNavigate }) {
+interface HeroProps {
+  onNavigate: (id: string) => void;
+}
+
+function Hero({ onNavigate }: HeroProps) {
   const [displayedName, setDisplayedName] = useState('');
   const [yearsCount, setYearsCount] = useState(0);
-  const [usersCount, setUsersCount] = useState(0);
   const [projectsCount, setProjectsCount] = useState(0);
-  
+
   const fullName = 'Lovro';
 
   useEffect(() => {
@@ -36,7 +39,7 @@ function Hero({ onNavigate }) {
     const typingDuration = fullName.length * 150; // Time to type all letters
     const pauseAfterName = 400; // Small pause after name finishes
     const startDelay = typingStartDelay + typingDuration + pauseAfterName;
-    
+
     const timeout = setTimeout(() => {
       const startTime = Date.now();
       const endValues = {
@@ -48,19 +51,18 @@ function Hero({ onNavigate }) {
       const animate = () => {
         const now = Date.now();
         const progress = Math.min((now - startTime) / duration, 1);
-        
+
         // Easing function for smooth animation
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        
+
         setYearsCount(Math.floor(easeOutQuart * endValues.years));
-        setUsersCount(Math.floor(easeOutQuart * endValues.users));
         setProjectsCount(Math.floor(easeOutQuart * endValues.projects));
-        
+
         if (progress < 1) {
           requestAnimationFrame(animate);
         }
       };
-      
+
       animate();
     }, startDelay);
 
@@ -74,7 +76,7 @@ function Hero({ onNavigate }) {
         <div className="hero-grid"></div>
         <div className="hero-glow"></div>
       </div>
-      
+
       <div className="hero-content">
         <h1 className="hero-title">
           <span className="hero-greeting">Hello, I'm</span>
@@ -86,12 +88,12 @@ function Hero({ onNavigate }) {
             Crafting <span className="highlight">digital experiences</span> that matter
           </span>
         </h1>
-        
+
         <p className="hero-description">
-          Senior Software Engineer with over 7 years of experience building high-quality mobile applications 
+          Senior Software Engineer with over 7 years of experience building high-quality mobile applications
           for enterprise-scale systems across fintech, healthcare, and telecom industries.
         </p>
-        
+
         <div className="hero-cta">
           <button className="btn btn-primary" onClick={() => onNavigate('projects')}>
             View My Work
@@ -101,7 +103,7 @@ function Hero({ onNavigate }) {
             Say Hello 👋
           </button>
         </div>
-        
+
         <div className="hero-stats">
           <div className="stat">
             <span className="stat-number">{yearsCount}+</span>
@@ -119,7 +121,7 @@ function Hero({ onNavigate }) {
           </div>
         </div>
       </div>
-      
+
       <div className="scroll-indicator">
         <span className="scroll-text">Scroll to explore</span>
         <div className="scroll-line"></div>

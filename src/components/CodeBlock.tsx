@@ -1,7 +1,12 @@
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
-function CodeBlock({ children, language = 'dart' }) {
+interface CodeBlockProps {
+  children: string;
+  language?: string;
+}
+
+function CodeBlock({ children, language = 'dart' }: CodeBlockProps) {
   return (
     <div className="code-block-wrapper">
       <div className="code-block-header">

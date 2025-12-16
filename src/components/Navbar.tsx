@@ -1,7 +1,12 @@
 import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
 
-function Navbar({ activeSection, onNavigate }) {
+interface NavbarProps {
+  activeSection: string;
+  onNavigate: (id: string) => void;
+}
+
+function Navbar({ activeSection, onNavigate }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -22,7 +27,7 @@ function Navbar({ activeSection, onNavigate }) {
     { id: 'contact', label: 'Contact' },
   ];
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (id: string) => {
     onNavigate(id);
     setMobileMenuOpen(false);
   };
@@ -35,7 +40,7 @@ function Navbar({ activeSection, onNavigate }) {
           <span className="logo-text">Temna Digital</span>
         </a>
 
-        <button 
+        <button
           className="mobile-menu-btn"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle menu"

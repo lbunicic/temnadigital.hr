@@ -1,13 +1,32 @@
-import { useState } from 'react';
 
-function BlogPost({ post, onClose }) {
+
+export interface BlogPostData {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  date: string;
+  readTime: string;
+  author: string;
+  graphic: React.ReactNode;
+  originalLink?: string;
+  content: React.ReactNode;
+  featured?: boolean;
+}
+
+interface BlogPostProps {
+  post: BlogPostData | null;
+  onClose: () => void;
+}
+
+function BlogPost({ post, onClose }: BlogPostProps) {
   if (!post) return null;
 
   return (
     <div className="blog-post-overlay" onClick={onClose}>
       <div className="blog-post-modal" onClick={(e) => e.stopPropagation()}>
         <button className="blog-post-close" onClick={onClose}>×</button>
-        
+
         <article className="blog-post-content">
           <header className="blog-post-header">
             <span className="blog-post-category">{post.category}</span>

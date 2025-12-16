@@ -36,13 +36,13 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     if (sectionId === 'contact') {
       // Open message composer instead of scrolling
       setShowMessageComposer(true);
       return;
     }
-    
+
     const element = document.getElementById(sectionId);
     if (element) {
       const offsetTop = element.offsetTop - 80;
@@ -54,7 +54,7 @@ function App() {
     setActiveSection(sectionId);
   };
 
-  const handleMessageSubmit = (message) => {
+  const handleMessageSubmit = (message: string) => {
     // Handle message submission (e.g., send to email, API, etc.)
     console.log('Message:', message);
     // Then scroll to contact section
@@ -81,7 +81,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
-      <MessageComposer 
+      <MessageComposer
         isOpen={showMessageComposer}
         onClose={() => setShowMessageComposer(false)}
         onSubmit={handleMessageSubmit}

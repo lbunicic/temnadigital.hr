@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import BlogPost from './BlogPost';
+import BlogPost, { BlogPostData } from './BlogPost';
 import { typeDrivenDesignPost, bleSdkPost } from '../data/blogPosts';
 
 function Blog() {
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPostData | null>(null);
 
   const posts = [
     {
@@ -49,7 +49,7 @@ function Blog() {
                 </div>
                 <h3 className="blog-title">{featuredPost.title}</h3>
                 <p className="blog-excerpt">{featuredPost.excerpt}</p>
-                <button 
+                <button
                   onClick={() => setSelectedPost(featuredPost.fullPost)}
                   className="blog-link blog-link-button"
                 >
@@ -75,7 +75,7 @@ function Blog() {
                   <p className="blog-excerpt">{post.excerpt}</p>
                   <div className="blog-footer">
                     <span className="blog-read-time">{post.readTime}</span>
-                    <button 
+                    <button
                       onClick={() => setSelectedPost(post.fullPost)}
                       className="blog-link blog-link-button"
                     >
