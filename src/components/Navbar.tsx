@@ -60,6 +60,7 @@ function Navbar({ activeSection, onNavigate }: NavbarProps) {
                 }}
               >
                 {item.label}
+                {item.id === 'blog' && <span className="nav-badge-pulse"></span>}
               </a>
             </li>
           ))}

@@ -1,11 +1,9 @@
-function Contact() {
+interface ContactProps {
+  onSayHello: () => void;
+}
+
+function Contact({ onSayHello }: ContactProps) {
   const contactInfo = [
-    {
-      icon: '✉',
-      label: 'Email',
-      value: 'hello@temnadigital.com',
-      link: 'mailto:hello@temnadigital.com',
-    },
     {
       icon: '◎',
       label: 'Location',
@@ -15,8 +13,8 @@ function Contact() {
     {
       icon: '◈',
       label: 'Social',
-      value: '@temnadigital',
-      link: '#',
+      value: 'LinkedIn',
+      link: 'https://www.linkedin.com/in/lovro-buničić/',
     },
   ];
 
@@ -49,7 +47,7 @@ function Contact() {
                 <div className="contact-text">
                   <span className="contact-label">{item.label}</span>
                   {item.link ? (
-                    <a href={item.link} className="contact-value">{item.value}</a>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="contact-value">{item.value}</a>
                   ) : (
                     <span className="contact-value">{item.value}</span>
                   )}
@@ -57,6 +55,10 @@ function Contact() {
               </div>
             ))}
           </div>
+
+          <button className="btn btn-primary contact-say-hello-btn" onClick={onSayHello}>
+            Say Hello 👋
+          </button>
         </div>
       </div>
     </section>

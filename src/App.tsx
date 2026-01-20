@@ -84,7 +84,7 @@ function App() {
         <Projects activeFilter={techFilter} onClearFilter={() => setTechFilter(null)} />
         <CV />
         <Blog />
-        <Contact />
+        <Contact onSayHello={() => setShowMessageComposer(true)} />
       </main>
       <Footer />
       <MessageComposer

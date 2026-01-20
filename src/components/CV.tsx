@@ -92,8 +92,6 @@ function CV() {
           </div>
 
           <div className="cv-simple-contact">
-            <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-            <span>•</span>
             <span>{contactInfo.location}</span>
             <span>•</span>
             <a href={contactInfo.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import emailjs from '@emailjs/browser';
 import profileImg from '../assets/profile.jpg';
 
 interface MessageComposerProps {
@@ -9,6 +10,9 @@ interface MessageComposerProps {
 
 function MessageComposer({ isOpen, onClose, onSubmit }: MessageComposerProps) {
   const [message, setMessage] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [isSending, setIsSending] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -33,15 +37,41 @@ function MessageComposer({ isOpen, onClose, onSubmit }: MessageComposerProps) {
     } else {
       setAnimationStage(0);
       setMessage('');
+      setEmail('');
+      setName('');
     }
   }, [isOpen]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (message.trim() && message !== 'Hello, Lovro 👋') {
-      onSubmit(message);
-      setMessage('');
-      onClose();
+    if (message.trim() && email.trim() && name.trim() && !isSending) {
+      setIsSending(true);
+      
+      try {
+        const templateParams = {
+          name: name,
+          email: email,
+          message: message,
+          time: new Date().toLocaleString(),
+        };
+
+        await emailjs.send(
+          'service_ead5st2',
+          'template_zx4x43d',
+          templateParams,
+          'Rnf12A6007PCWjImD'
+        );
+
+        setMessage('');
+        setEmail('');
+        setName('');
+        onClose();
+      } catch (error) {
+        console.error('Failed to send email:', error);
+        alert('Failed to send message. Please try again.');
+      } finally {
+        setIsSending(false);
+      }
     }
   };
 
@@ -75,6 +105,32 @@ function MessageComposer({ isOpen, onClose, onSubmit }: MessageComposerProps) {
           {/* Input form that fades in */}
           <form className={`message-input-form stage-${animationStage}`} onSubmit={handleSubmit}>
             <div className="form-group">
+              <label htmlFor="name-input">Your Name</label>
+              <input
+                type="text"
+                id="name-input"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="John Doe"
+                className="message-email-input"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email-input">Your Email</label>
+              <input
+                type="email"
+                id="email-input"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className="message-email-input"
+                required
+              />
+            </div>
+
+            <div className="form-group">
               <label htmlFor="message-input">Your Message</label>
               <textarea
                 ref={inputRef}
@@ -87,31 +143,18 @@ function MessageComposer({ isOpen, onClose, onSubmit }: MessageComposerProps) {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="email-input">Your Email</label>
-              <input
-                type="email"
-                id="email-input"
-                placeholder="you@example.com"
-                className="message-email-input"
-                required
-              />
-            </div>
-
             <button
               type="submit"
               className="message-send-btn-full"
-              disabled={!message.trim() || message === 'Hello, Lovro 👋'}
+              disabled={!message.trim() || !email.trim() || !name.trim() || isSending}
             >
-              Send Message
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              {isSending ? 'Sending...' : 'Send Message'}
+              {!isSending && (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              )}
             </button>
-
-            <div className="message-helper-text">
-              Or email me directly at <a href="mailto:hello@temnadigital.com">hello@temnadigital.com</a>
-            </div>
           </form>
         </div>
       </div>
