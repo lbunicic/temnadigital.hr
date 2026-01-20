@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { FaApple, FaGlobe } from 'react-icons/fa';
+import { SiFlutter } from 'react-icons/si';
 
 interface HeroProps {
   onNavigate: (id: string) => void;
+  onTechClick: (tech: string) => void;
 }
 
-function Hero({ onNavigate }: HeroProps) {
+function Hero({ onNavigate, onTechClick }: HeroProps) {
   const [displayedName, setDisplayedName] = useState('');
   const [yearsCount, setYearsCount] = useState(0);
   const [projectsCount, setProjectsCount] = useState(0);
@@ -44,7 +47,6 @@ function Hero({ onNavigate }: HeroProps) {
       const startTime = Date.now();
       const endValues = {
         years: 7,
-        users: 160,
         projects: 9
       };
 
@@ -111,14 +113,24 @@ function Hero({ onNavigate }: HeroProps) {
           </div>
           <div className="stat-divider"></div>
           <div className="stat">
-            <span className="stat-number">Millions</span>
-            <span className="stat-label">Users Served</span>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat">
             <span className="stat-number">{projectsCount}+</span>
             <span className="stat-label">Major Projects</span>
           </div>
+        </div>
+
+        <div className="hero-tech">
+          <button className="tech-badge" onClick={() => onTechClick('iOS')}>
+            <FaApple className="tech-badge-icon" />
+            <span>iOS</span>
+          </button>
+          <button className="tech-badge" onClick={() => onTechClick('Flutter')}>
+            <SiFlutter className="tech-badge-icon" />
+            <span>Flutter</span>
+          </button>
+          <button className="tech-badge" onClick={() => onTechClick('Web')}>
+            <FaGlobe className="tech-badge-icon" />
+            <span>Web</span>
+          </button>
         </div>
       </div>
 

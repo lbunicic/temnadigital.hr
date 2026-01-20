@@ -10,7 +10,12 @@ import {
   ConferenceGraphic,
 } from './ProjectGraphics';
 
-function Projects() {
+interface ProjectsProps {
+  activeFilter: string | null;
+  onClearFilter: () => void;
+}
+
+function Projects({ activeFilter, onClearFilter }: ProjectsProps) {
   const projects = [
     {
       name: "most.io - Aviation Retail Platform",
@@ -40,7 +45,7 @@ function Projects() {
         "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
         "Identified and resolved multiple performance issues",
       ],
-      technologies: ["SwiftUI", "MapKit", "Sentry", "Segment", "SpriteKit", "GraphQL"],
+      technologies: ["iOS", "SwiftUI", "MapKit", "Sentry", "Segment", "SpriteKit", "GraphQL"],
       link: "https://tinyurl.com/enigma-ios",
     },
     {
@@ -50,7 +55,7 @@ function Projects() {
       graphic: <MobileAppGraphic />,
       rating: "4.9 ★, 108 ratings",
       highlights: ["Maintaining the app since 2020"],
-      technologies: ["UIKit"],
+      technologies: ["iOS", "UIKit"],
       link: "https://tinyurl.com/nova-eva",
     },
     {
@@ -66,7 +71,7 @@ function Projects() {
         "Delivered the product via private cocoapod spec",
         "Wrote about architectural challenges in a blog post",
       ],
-      technologies: ["Bluetooth", "OTA", "Cocoapods", "CoreBluetooth"],
+      technologies: ["iOS", "Bluetooth", "OTA", "Cocoapods", "CoreBluetooth"],
       link: "http://tinyurl.com/ble-blogpost",
     },
     {
@@ -83,7 +88,7 @@ function Projects() {
         "Implemented 3D UI with SceneKit, integrated it with SwiftUI",
         "Worked with 3D Assets Team to identify and resolve performance issues",
       ],
-      technologies: ["SwiftUI", "SceneKit"],
+      technologies: ["iOS", "SwiftUI", "SceneKit"],
     },
     {
       name: "Mobile App for a Major Telecom",
@@ -95,7 +100,7 @@ function Projects() {
         "Helped with app development",
         "Implemented server driven UI for subscription tier based screens",
       ],
-      technologies: ["UIKit", "Server driven UI"],
+      technologies: ["iOS", "UIKit", "Server driven UI"],
     },
     {
       name: "Gaming Arena Reservation iPad Application",
@@ -108,7 +113,7 @@ function Projects() {
         "Helped implement Square payments",
         "Implemented custom and complex layouts for seat reservation calendar",
       ],
-      technologies: ["RxSwift", "Clean Architecture", "iPadOS", "WebSockets", "Sentry", "Bitrise"],
+      technologies: ["iOS", "RxSwift", "Clean Architecture", "iPadOS", "WebSockets", "Sentry", "Bitrise"],
     },
     {
       name: "Smart Lab Monitoring (IOT)",
@@ -119,7 +124,7 @@ function Projects() {
       highlights: [
         "Developed a simple app that included sensor data monitoring and push notifications",
       ],
-      technologies: ["UIKit", "Firebase Cloud Messaging"],
+      technologies: ["iOS", "UIKit", "Firebase Cloud Messaging"],
     },
     {
       name: "HSKIKI26 (freelance project)",
@@ -130,9 +135,13 @@ function Projects() {
       highlights: [
         "Developed native Android and iOS conference itinerary applications for Croatian Meeting of Chemists and Chemical Engineers",
       ],
-      technologies: ["UIKit"],
+      technologies: ["iOS", "UIKit"],
     },
   ];
+
+  const filteredProjects = activeFilter 
+    ? projects.filter(project => project.technologies.includes(activeFilter))
+    : projects;
 
   return (
     <section id="projects" className="projects">
@@ -147,8 +156,19 @@ function Projects() {
           </p>
         </div>
 
+        {activeFilter && (
+          <div className="projects-filter-indicator">
+            <span className="filter-text">
+              Showing <strong>{activeFilter}</strong> projects ({filteredProjects.length})
+            </span>
+            <button className="filter-clear-btn" onClick={onClearFilter}>
+              Clear filter ✕
+            </button>
+          </div>
+        )}
+
         <div className="projects-grid">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <article key={index} className="project-card">
               {project.graphic && (
                 <div className="project-card-graphic">

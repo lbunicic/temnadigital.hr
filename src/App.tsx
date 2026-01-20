@@ -13,6 +13,7 @@ import './App.css';
 function App() {
   const [activeSection, setActiveSection] = useState('home');
   const [showMessageComposer, setShowMessageComposer] = useState(false);
+  const [techFilter, setTechFilter] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,13 +70,18 @@ function App() {
     setActiveSection('contact');
   };
 
+  const handleTechFilter = (tech: string) => {
+    setTechFilter(tech);
+    scrollToSection('projects');
+  };
+
   return (
     <div className="app">
       <Navbar activeSection={activeSection} onNavigate={scrollToSection} />
       <main>
-        <Hero onNavigate={scrollToSection} />
+        <Hero onNavigate={scrollToSection} onTechClick={handleTechFilter} />
         <About />
-        <Projects />
+        <Projects activeFilter={techFilter} onClearFilter={() => setTechFilter(null)} />
         <CV />
         <Blog />
         <Contact />
