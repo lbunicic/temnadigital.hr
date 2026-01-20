@@ -1,3 +1,74 @@
+export function PortfolioWebGraphic() {
+  return (
+    <svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="project-graphic"
+    >
+      {/* Browser window */}
+      <rect x="20" y="25" width="80" height="60" stroke="currentColor" strokeWidth="1.5" rx="4" opacity="0.3" />
+      <line x1="20" y1="35" x2="100" y2="35" stroke="currentColor" strokeWidth="1.5" opacity="0.3" />
+      
+      {/* Browser dots */}
+      <circle cx="28" cy="30" r="1.5" fill="currentColor" opacity="0.4" />
+      <circle cx="34" cy="30" r="1.5" fill="currentColor" opacity="0.4" />
+      <circle cx="40" cy="30" r="1.5" fill="currentColor" opacity="0.4" />
+      
+      {/* Code lines inside browser */}
+      <line x1="30" y1="45" x2="55" y2="45" stroke="currentColor" strokeWidth="2" opacity="0.5" className="code-line">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2s" repeatCount="indefinite" />
+      </line>
+      <line x1="30" y1="52" x2="70" y2="52" stroke="currentColor" strokeWidth="2" opacity="0.4" className="code-line">
+        <animate attributeName="opacity" values="0.4;0.6;0.4" dur="2.5s" repeatCount="indefinite" />
+      </line>
+      <line x1="30" y1="59" x2="60" y2="59" stroke="currentColor" strokeWidth="2" opacity="0.5" className="code-line">
+        <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.2s" repeatCount="indefinite" />
+      </line>
+      <line x1="30" y1="66" x2="75" y2="66" stroke="currentColor" strokeWidth="2" opacity="0.4" className="code-line">
+        <animate attributeName="opacity" values="0.4;0.6;0.4" dur="2.8s" repeatCount="indefinite" />
+      </line>
+      
+      {/* Cursor/pointer */}
+      <polygon points="75,55 85,70 78,68" fill="currentColor" opacity="0.6" className="cursor-icon">
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0,0; 3,3; 0,0"
+          dur="1.5s"
+          repeatCount="indefinite"
+        />
+      </polygon>
+      
+      {/* Orbiting particles representing interactivity */}
+      <circle cx="60" cy="60" r="35" stroke="currentColor" strokeWidth="0.5" opacity="0.1" className="orbit-ring" />
+      
+      <circle cx="95" cy="60" r="2" fill="currentColor" opacity="0.5">
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="0 60 60"
+          to="360 60 60"
+          dur="8s"
+          repeatCount="indefinite"
+        />
+      </circle>
+      <circle cx="25" cy="60" r="2" fill="currentColor" opacity="0.5">
+        <animateTransform
+          attributeName="transform"
+          type="rotate"
+          from="180 60 60"
+          to="540 60 60"
+          dur="8s"
+          repeatCount="indefinite"
+        />
+      </circle>
+    </svg>
+  );
+}
+
 export function AviationPaymentGraphic() {
   return (
     <svg

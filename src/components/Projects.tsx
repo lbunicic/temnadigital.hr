@@ -1,4 +1,5 @@
 import { 
+  PortfolioWebGraphic,
   AviationPaymentGraphic, 
   UFOGraphic, 
   MindfulnessGraphic, 
@@ -34,6 +35,21 @@ function Projects({ activeFilter, onClearFilter }: ProjectsProps) {
       ],
       technologies: ["Flutter", "Dart", "PCI Compliance", "Fintech", "Offline-First"],
       link: "https://most.io/",
+    },
+    {
+      name: "temnadigital.hr - Portfolio Website",
+      category: "Web",
+      year: 2026,
+      graphic: <PortfolioWebGraphic />,
+      highlights: [
+        "Designed and developed a modern, monochromatic portfolio website",
+        "Built with React and TypeScript for type-safe, maintainable code",
+        "Implemented interactive tech filtering with smooth animations",
+        "Automated deployment pipeline with GitHub Actions to GitHub Pages",
+        "Optimized for performance and responsive across all devices",
+      ],
+      technologies: ["Web", "React", "TypeScript", "Vite", "GitHub Actions"],
+      link: "https://temnadigital.hr/",
     },
     {
       name: "UFO Tracking app",
