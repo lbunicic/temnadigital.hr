@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
 import Projects from './components/Projects';
 import CV from './components/CV';
 import Blog from './components/Blog';
@@ -17,7 +16,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'cv', 'blog', 'contact'];
+      const sections = ['home', 'projects', 'cv', 'blog', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -80,7 +79,6 @@ function App() {
       <Navbar activeSection={activeSection} onNavigate={scrollToSection} />
       <main>
         <Hero onNavigate={scrollToSection} onTechClick={handleTechFilter} />
-        <About />
         <Projects activeFilter={techFilter} onClearFilter={() => setTechFilter(null)} />
         <CV />
         <Blog />
