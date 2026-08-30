@@ -11,6 +11,7 @@ function Footer() {
     { name: 'CV', href: '#cv' },
     { name: 'Blog', href: '#blog' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Privacy Policy', href: '/sentir/privacy/' },
   ];
 
   return (
@@ -67,4 +68,3 @@ function Footer() {
 }
 
 export default Footer;
-
