@@ -1,15 +1,10 @@
-import { 
-  PortfolioWebGraphic,
-  AviationPaymentGraphic, 
-  UFOGraphic, 
-  MindfulnessGraphic, 
-  BluetoothDeviceGraphic, 
-  MobileAppGraphic,
-  TelecomGraphic,
-  GamingArenaGraphic,
-  IoTGraphic,
-  ConferenceGraphic,
-} from './ProjectGraphics';
+import Link from './Link';
+import { shouldHandleClick } from '../hooks/useRouter';
+import DeviceMockup from './DeviceMockup';
+import { projects } from '../data/siteMeta';
+import { projectGraphic, projectScene } from '../data/graphics';
+import AirlinePartners from './AirlinePartners';
+import NdaProjectsCard from './NdaProjectsCard';
 
 interface ProjectsProps {
   activeFilter: string | null;
@@ -17,147 +12,11 @@ interface ProjectsProps {
 }
 
 function Projects({ activeFilter, onClearFilter }: ProjectsProps) {
-  const projects = [
-    {
-      name: "most.io - Aviation Retail Platform",
-      category: "Fintech",
-      year: 2024,
-      graphic: <AviationPaymentGraphic />,
-      stats: "160M+ Passengers • 28K+ Crew • 1K+ Aircrafts",
-      highlights: [
-        "Building Flutter-based payment and retail platforms for major airlines",
-        "Serving 28,000+ airline crew members across 1,000+ aircrafts globally",
-        "Reaching 160M+ passengers worldwide with secure retail solutions",
-        "Working with major carriers: Southwest Airlines, Play, Hawaiian Airlines, and more",
-        "Developing PCI-compliant fintech systems for aviation transactions",
-        "Building mobile POS and secure, offline-capable payment processing",
-        "Supporting 5,000+ flights per day across global airline networks",
-      ],
-      technologies: ["Flutter", "Dart", "PCI Compliance", "Fintech", "Offline-First"],
-      link: "https://most.io/",
-    },
-    {
-      name: "temnadigital.hr - Portfolio Website",
-      category: "Web",
-      year: 2026,
-      graphic: <PortfolioWebGraphic />,
-      highlights: [
-        "Designed and developed a modern, monochromatic portfolio website",
-        "Built with React and TypeScript for type-safe, maintainable code",
-        "Implemented interactive tech filtering with smooth animations",
-        "Automated deployment pipeline with GitHub Actions to GitHub Pages",
-        "Optimized for performance and responsive across all devices",
-      ],
-      technologies: ["Web", "React", "TypeScript", "Vite", "GitHub Actions"],
-      link: "https://temnadigital.hr/",
-    },
-    {
-      name: "UFO Tracking app",
-      category: "Entertainment",
-      year: 2023,
-      graphic: <UFOGraphic />,
-      rating: "4.8 ★, 4.8k Ratings",
-      highlights: [
-        "Assisted the team in refactoring legacy code, setting up app architecture, and delivering the app to the App Store",
-        "Identified and resolved multiple performance issues",
-      ],
-      technologies: ["iOS", "SwiftUI", "MapKit", "Sentry", "Segment", "SpriteKit", "GraphQL"],
-      link: "https://tinyurl.com/enigma-ios",
-    },
-    {
-      name: "Nova Eva (freelance project)",
-      category: "Lifestyle",
-      year: 2020,
-      graphic: <MobileAppGraphic />,
-      rating: "4.9 ★, 108 ratings",
-      highlights: ["Maintaining the app since 2020"],
-      technologies: ["iOS", "UIKit"],
-      link: "https://tinyurl.com/nova-eva",
-    },
-    {
-      name: "Bluetooth (BLE) SDK for a medical device",
-      category: "Healthcare",
-      year: 2022,
-      graphic: <BluetoothDeviceGraphic />,
-      nda: true,
-      highlights: [
-        "Helped design the public API for the SDK",
-        "Implemented the SDK",
-        "Designed and implemented a robust Over The Air (OTA) firmware update mechanism",
-        "Delivered the product via private cocoapod spec",
-        "Wrote about architectural challenges in a blog post",
-      ],
-      technologies: ["iOS", "Bluetooth", "OTA", "Cocoapods", "CoreBluetooth"],
-      link: "http://tinyurl.com/ble-blogpost",
-    },
-    {
-      name: "Mindfulness app",
-      category: "Healthcare",
-      year: 2023,
-      graphic: <MindfulnessGraphic />,
-      nda: true,
-      highlights: [
-        "Led the project development (architecture setup, style guide, code reviews etc.)",
-        "Communicated deadlines, bottlenecks, estimates to both the team and the clients",
-        "Supervised backend development",
-        "Implemented advanced SwiftUI animations",
-        "Implemented 3D UI with SceneKit, integrated it with SwiftUI",
-        "Worked with 3D Assets Team to identify and resolve performance issues",
-      ],
-      technologies: ["iOS", "SwiftUI", "SceneKit"],
-    },
-    {
-      name: "Mobile App for a Major Telecom",
-      category: "Telecom",
-      year: 2022,
-      graphic: <TelecomGraphic />,
-      nda: true,
-      highlights: [
-        "Helped with app development",
-        "Implemented server driven UI for subscription tier based screens",
-      ],
-      technologies: ["iOS", "UIKit", "Server driven UI"],
-    },
-    {
-      name: "Gaming Arena Reservation iPad Application",
-      category: "Entertainment",
-      year: 2021,
-      graphic: <GamingArenaGraphic />,
-      nda: true,
-      highlights: [
-        "Helped resolving backend - client integration issues by introducing Clean Architecture concepts",
-        "Helped implement Square payments",
-        "Implemented custom and complex layouts for seat reservation calendar",
-      ],
-      technologies: ["iOS", "RxSwift", "Clean Architecture", "iPadOS", "WebSockets", "Sentry", "Bitrise"],
-    },
-    {
-      name: "Smart Lab Monitoring (IOT)",
-      category: "IoT",
-      year: 2020,
-      graphic: <IoTGraphic />,
-      nda: true,
-      highlights: [
-        "Developed a simple app that included sensor data monitoring and push notifications",
-      ],
-      technologies: ["iOS", "UIKit", "Firebase Cloud Messaging"],
-    },
-    {
-      name: "HSKIKI26 (freelance project)",
-      category: "Events",
-      year: 2019,
-      graphic: <ConferenceGraphic />,
-      nda: true,
-      highlights: [
-        "Developed native Android and iOS conference itinerary applications for Croatian Meeting of Chemists and Chemical Engineers",
-      ],
-      technologies: ["iOS", "UIKit"],
-    },
-  ];
-
   const filteredProjects = activeFilter 
     ? projects.filter(project => project.technologies.includes(activeFilter))
     : projects;
+  const publicProjects = filteredProjects.filter((project) => !project.nda);
+  const ndaProjects = filteredProjects.filter((project) => project.nda);
 
   return (
     <section id="projects" className="projects">
@@ -183,47 +42,83 @@ function Projects({ activeFilter, onClearFilter }: ProjectsProps) {
           </div>
         )}
 
-        <div className="projects-grid">
-          {filteredProjects.map((project, index) => (
-            <article key={index} className="project-card">
-              {project.graphic && (
-                <div className="project-card-graphic">
-                  {project.graphic}
-                </div>
-              )}
-              <div className="project-card-header">
-                <h3 className="project-card-name">{project.name}</h3>
-                <div className="project-card-labels">
-                  {project.rating && (
-                    <span className="project-card-rating">{project.rating}</span>
-                  )}
-                  {project.stats && (
-                    <span className="project-card-stats">{project.stats}</span>
-                  )}
-                  {project.nda && !project.rating && !project.stats && (
-                    <span className="project-card-nda">NDA</span>
-                  )}
-                </div>
-              </div>
-              <ul className="project-card-highlights">
-                {project.highlights.map((highlight, idx) => (
-                  <li key={idx}>{highlight}</li>
-                ))}
-              </ul>
-              <div className="project-card-footer">
-                <div className="project-card-tech">
-                  {project.technologies.map((tech, idx) => (
-                    <span key={idx} className="project-tech-tag">{tech}</span>
-                  ))}
-                </div>
-                {project.link && (
-                  <a href={project.link} target="_blank" rel="noopener noreferrer" className="project-card-link">
-                    View →
-                  </a>
+        <div className={`projects-grid bento${activeFilter ? ' is-filtered' : ''}`}>
+          {publicProjects.map((project) => {
+            const size = activeFilter ? undefined : project.size;
+            return (
+              <Link
+                key={project.slug}
+                to={`/work/${project.slug}`}
+                transition
+                data-slug={project.slug}
+                className={`project-card bento-tile${size ? ` bento-${size}` : ''}`}
+                onClick={(event) => {
+                  // Only plain clicks navigate in-app (and morph); modified clicks open a new tab
+                  if (shouldHandleClick(event)) event.currentTarget.classList.add('vt-active');
+                }}
+              >
+                {size ? (
+                  <div className="bento-visual">
+                    <DeviceMockup
+                      kind={project.device}
+                      graphic={projectGraphic(project.slug)}
+                      image={project.image}
+                      scene={projectScene(project.slug)}
+                      alt={`${project.name} screenshot`}
+                    />
+                  </div>
+                ) : project.image || projectScene(project.slug) ? (
+                  <div className={`project-card-shot project-card-shot-${project.device}`} aria-hidden="true">
+                    {project.image ? <img src={project.image} alt="" loading="lazy" /> : projectScene(project.slug)}
+                  </div>
+                ) : (
+                  <div className="project-card-graphic">{projectGraphic(project.slug)}</div>
                 )}
-              </div>
-            </article>
-          ))}
+
+                <div className="bento-body">
+                  <span className="bento-eyebrow">
+                    {project.category} · {project.year}
+                    {project.nda && <span className="project-card-nda">NDA</span>}
+                  </span>
+                  <h3 className="project-card-name">{project.name}{project.indie && <span className="project-indie-tag">Indie</span>}</h3>
+                  {project.rating && <span className="project-card-rating">{project.rating}</span>}
+
+                  {size === 'xl' && project.metrics ? (
+                    <dl className="bento-metrics">
+                      {project.metrics.map((metric) => (
+                        <div key={metric.label} className="bento-metric">
+                          <dt>{metric.label}</dt>
+                          <dd>{metric.value}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  ) : size === 'wide' ? (
+                    <ul className="bento-points">
+                      {project.highlights.slice(0, 3).map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="bento-summary">{project.highlights[0]}</p>
+                  )}
+
+                  {size === 'xl' && project.airlines && (
+                    <AirlinePartners airlines={project.airlines} compact />
+                  )}
+
+                  <div className="project-card-footer">
+                    <div className="project-card-tech">
+                      {project.technologies.slice(0, size ? 5 : 3).map((tech) => (
+                        <span key={tech} className="project-tech-tag">{tech}</span>
+                      ))}
+                    </div>
+                    <span className="project-card-link" aria-hidden="true">Details →</span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+          {ndaProjects.length > 0 && <NdaProjectsCard projects={ndaProjects} />}
         </div>
       </div>
     </section>

@@ -1,3 +1,6 @@
+import { copyToClipboard } from './Toast';
+import { SITE } from '../data/siteMeta';
+
 interface ContactProps {
   onSayHello: () => void;
 }
@@ -14,7 +17,7 @@ function Contact({ onSayHello }: ContactProps) {
       icon: '◈',
       label: 'Social',
       value: 'LinkedIn',
-      link: 'https://www.linkedin.com/in/lovro-buničić/',
+      link: SITE.linkedin,
     },
   ];
 
@@ -55,6 +58,15 @@ function Contact({ onSayHello }: ContactProps) {
               </div>
             ))}
           </div>
+
+          <button
+            className="copy-email"
+            onClick={() => copyToClipboard(SITE.email, 'Email copied to clipboard')}
+            aria-label={`Copy email address ${SITE.email}`}
+          >
+            <span className="copy-email-address">{SITE.email}</span>
+            <span className="copy-email-action">Copy</span>
+          </button>
 
           <button className="btn btn-primary contact-say-hello-btn" onClick={onSayHello}>
             Say Hello 👋

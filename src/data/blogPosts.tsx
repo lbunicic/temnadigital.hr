@@ -1,17 +1,7 @@
-import { TypeDrivenGraphic, BluetoothGraphic } from '../components/BlogGraphics';
 import CodeBlock from '../components/CodeBlock';
+import { TypedIdComparison, CommandQueueDemo, PanLifetimeDiagram, RetryTimeoutDemo, CancellationDemo } from '../components/ArticleDemos';
 
-export const typeDrivenDesignPost = {
-  id: 'type-driven-design',
-  title: 'Type-Driven Design: Safer Software for Complex Domains',
-  excerpt: 'Reducing bugs via Type Driven Design - exploring how encoding business rules into the type system can eliminate entire classes of bugs before they reach production.',
-  category: 'Software Engineering',
-  date: 'Oct 22, 2025',
-  readTime: '12 min read',
-  author: 'Lovro Buničić',
-  graphic: <TypeDrivenGraphic />,
-  originalLink: 'https://medium.com/@lovro.bunicic/type-driven-design-6412f29e3d5d',
-  content: (
+const typeDrivenDesignContent = (
     <>
       <p className="blog-lead">
         Originally published for Most, makers of mobile POS and secure, offline‑capable payments for airlines, 
@@ -88,6 +78,7 @@ export const typeDrivenDesignPost = {
         When packing a drawer, the correct usage becomes immediately clear and misuse is virtually impossible. The 
         compiler will catch any errors at an early stage, long before the code has a chance to reach production.
       </p>
+      <TypedIdComparison />
       <p>
         The intention is clear. To make this a bit easier, we can construct a phantom type ID.
       </p>
@@ -207,6 +198,7 @@ void storePan(TruncatedPan pan) { }`}</CodeBlock>
         Some languages provide options for consumable types (e.g., consumable methods in Swift); in others, we can 
         achieve similar effects by adding a consumable type.
       </p>
+      <PanLifetimeDiagram />
       <CodeBlock language="dart">{`class Consumable<T> {
   final T _value;
   
@@ -270,20 +262,9 @@ void storePan(TruncatedPan pan) { }`}</CodeBlock>
         </a>
       </p>
     </>
-  ),
-};
+);
 
-export const bleSdkPost = {
-  id: 'ble-sdk-architecture',
-  title: 'Solving Architectural Problems in Bluetooth Low Energy Mobile Apps',
-  excerpt: 'Learn how to create a solid BLE architecture using Command and Queue patterns to handle complex operations like OTA firmware updates.',
-  category: 'Mobile Development',
-  date: 'Jan 27, 2021',
-  readTime: '10 min read',
-  author: 'Lovro Buničić & Josip Grubeša',
-  graphic: <BluetoothGraphic />,
-  originalLink: 'https://arsfutura.com/blog/solving-architectural-problems-in-bluetooth-low-energy-mobile-apps',
-  content: (
+const bleSdkContent = (
     <>
       <p className="blog-lead">
         Originally published on Ars Futura blog. Learn how to create a solid BLE architecture, 
@@ -402,6 +383,7 @@ queue.add(DisconnectCommand())`}</CodeBlock>
         commands can be written using generics which can significantly reduce code redundancy.
       </p>
 
+      <CommandQueueDemo />
       <h2>More Opportunities</h2>
 
       <h3>Retry and Timeout</h3>
@@ -416,6 +398,7 @@ var timeoutCommand = TimeoutCommand(command)
 var retryTimeoutCommand = RetryCommand(timeoutCommand)
 
 queue.add(retryTimeoutCommand)`}</CodeBlock>
+      <RetryTimeoutDemo />
 
       <h3>Auto Connection, Auto Authorization</h3>
       <p>
@@ -483,6 +466,7 @@ queue.add(cancelableCommand)
 
 // …
 cancelableCommand.cancel()`}</CodeBlock>
+      <CancellationDemo />
 
       <h2>To Sum Up</h2>
       <p>
@@ -504,11 +488,11 @@ cancelableCommand.cancel()`}</CodeBlock>
         <li>Bluetooth Low Energy: Essentials for Creating Software with Device to Smartphone Connectivity</li>
       </ul>
     </>
-  ),
-};
+);
 
-export const allBlogPosts = [
-  typeDrivenDesignPost,
-  bleSdkPost,
-];
+// Full article bodies keyed by slug (metadata lives in siteMeta.ts)
+export const postContent: Record<string, React.ReactNode> = {
+  'type-driven-design': typeDrivenDesignContent,
+  'ble-sdk-architecture': bleSdkContent,
+};
 

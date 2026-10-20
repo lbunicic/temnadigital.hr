@@ -33,26 +33,41 @@ There are no test commands — the project has no test framework configured.
 ```
 src/
 ├── assets/                  # Static assets (PDF, images, SVGs)
-├── components/              # React components (14 files)
-│   ├── Navbar.tsx           # Navigation bar with mobile menu
-│   ├── Hero.tsx             # Hero section with animated typing + counters
-│   ├── Projects.tsx         # Project listing with category/tech filtering
-│   ├── Portfolio.tsx        # Portfolio grid with filter UI
+├── components/              # React components (flat .tsx files)
+│   ├── Navbar.tsx           # Navigation bar with mobile menu + ⌘K trigger
+│   ├── LogoMark.tsx         # SVG ◈ logo mark (draws itself in the navbar)
+│   ├── Link.tsx             # <a> for in-app routes (client-side navigation)
+│   ├── Hero.tsx             # Hero section with live Zagreb clock, typing + counters
+│   ├── Projects.tsx         # Bento grid of project tiles (link to /work/<slug>)
+│   ├── DeviceMockup.tsx     # Phone/tablet/browser frame (illustration or screenshot)
+│   ├── WorkPage.tsx         # Project detail page (/work/<slug>)
+│   ├── Portfolio.tsx        # Legacy portfolio grid (not rendered)
 │   ├── ProjectGraphics.tsx  # SVG graphic components for project cards
 │   ├── CV.tsx               # CV/experience section with PDF download
-│   ├── Blog.tsx             # Blog section listing posts
-│   ├── BlogPost.tsx         # Modal for displaying a full blog post
+│   ├── Blog.tsx             # Home blog section (links to /blog/<slug>)
+│   ├── BlogIndex.tsx        # All posts page (/blog)
+│   ├── BlogPost.tsx         # Article page (/blog/<slug>), lazy-loaded
 │   ├── BlogGraphics.tsx     # SVG graphic components for blog posts
-│   ├── CodeBlock.tsx        # Syntax-highlighted code blocks
-│   ├── Contact.tsx          # Contact info section
+│   ├── CodeBlock.tsx        # Syntax-highlighted code blocks (Prism light: dart, swift)
+│   ├── Contact.tsx          # Contact info section + copy-email
 │   ├── MessageComposer.tsx  # Email composition modal (EmailJS)
-│   ├── Footer.tsx           # Footer with newsletter signup
+│   ├── CommandPalette.tsx   # ⌘K / Ctrl+K command menu
+│   ├── Toast.tsx            # Toast live region + showToast/copyToClipboard helpers
+│   ├── NotFound.tsx         # 404 page
+│   ├── Footer.tsx           # Footer
 │   └── ThemeToggle.tsx      # Dark/light theme toggle
 ├── context/
 │   └── ThemeContext.tsx      # Theme state (React Context + localStorage)
+├── hooks/
+│   ├── useRouter.ts         # Minimal History API router (usePathname, navigate)
+│   ├── useScrollReveal.ts   # IntersectionObserver scroll-reveal classes
+│   ├── useCardSpotlight.ts  # Cursor-following spotlight vars on cards
+│   └── useSvgGraphics.ts    # Card graphics: draw-in on reveal, animate only on hover
 ├── data/
-│   └── blogPosts.tsx        # Blog post content and metadata
-├── App.tsx                  # Root component — section layout + scroll logic
+│   ├── siteMeta.ts          # Plain-data source of truth: site info, posts, projects, routes
+│   ├── graphics.tsx         # Slug → SVG graphic maps for projects and posts
+│   └── blogPosts.tsx        # Article bodies (JSX) keyed by slug
+├── App.tsx                  # Root component — route switch, section scroll logic, ⌘K
 ├── App.css                  # App-specific style overrides (minimal)
 ├── index.css                # Global styles (~3,500 lines) — theming, layout, components
 ├── main.tsx                 # Entry point — renders App inside ThemeProvider
@@ -79,7 +94,9 @@ index.html                     # HTML entry point (loads /src/main.tsx)
 - Components are in `src/components/` as flat `.tsx` files — no nested folders per component.
 - State management uses React's built-in hooks (`useState`, `useEffect`, `useContext`). No Redux or external state library.
 - Theme context (`ThemeProvider` / `useTheme`) wraps the entire app and persists to localStorage.
-- The app is a single-page layout: `Navbar > Hero > Projects > CV > Blog > Contact > Footer`, with scroll-based active section tracking in `App.tsx`.
+- Routes (see `App.tsx`): `/` (home sections), `/blog`, `/blog/<slug>`, `/work/<slug>`, anything else → `NotFound`. Home is `Navbar > Hero > Projects > CV > Blog > Contact > Footer` with scroll-based active section tracking.
+- Routing is a small custom History API router (`src/hooks/useRouter.ts`), no react-router. Use `<Link to>` for in-app links and `navigate(path, { section })` to reach a home section from another page. Paths are normalized without a trailing slash.
+- Project tiles morph into the detail page via the View Transitions API: the clicked tile gets `.vt-active` and `.work-hero` shares its `view-transition-name` only while `html.vt-route` is set.
 
 ### Styling
 
@@ -99,9 +116,10 @@ index.html                     # HTML entry point (loads /src/main.tsx)
 ### Content management
 
 - All content is static and lives in TypeScript/TSX files:
-  - Blog posts: `src/data/blogPosts.tsx` (metadata + JSX content)
-  - Project data: hardcoded in `src/components/Projects.tsx`
-  - Contact info: hardcoded in `CV.tsx` and `Contact.tsx`
+  - Site info, post metadata and project data: `src/data/siteMeta.ts` (must stay plain data — `vite.config.ts` imports it at build time)
+  - Blog post bodies: `src/data/blogPosts.tsx` (`postContent` keyed by slug)
+  - Contact info: `SITE` in `siteMeta.ts`, plus hardcoded bits in `CV.tsx` and `Contact.tsx`
+  - `SITE.availability` (null by default) adds an availability note next to the hero clock
 - No CMS, no database, no API backend.
 
 ### TypeScript
@@ -127,7 +145,7 @@ index.html                     # HTML entry point (loads /src/main.tsx)
   1. Checkout code
   2. Setup Node.js 20 with npm cache
   3. `npm ci` to install dependencies
-  4. `npm run build` to produce `./dist`
+  4. `npm run build` to produce `./dist`. The `prerender-routes` plugin in `vite.config.ts` then writes `dist/<route>/index.html` for every route with its own `<title>`/Open Graph tags (link previews don't run JS), `404.html` (GitHub Pages fallback that boots the app), `sitemap.xml` and `robots.txt`. The head block between the `route-meta` markers in `index.html` is replaced per route.
   5. Upload and deploy to GitHub Pages
 - **Custom domain:** `temnadigital.hr` (via CNAME file)
 
@@ -143,15 +161,15 @@ index.html                     # HTML entry point (loads /src/main.tsx)
 
 ### Adding a new blog post
 
-1. Create the post content in `src/data/blogPosts.tsx` following the existing structure:
-   - Export a post object with: `id`, `title`, `excerpt`, `category`, `date`, `readTime`, `author`, `graphic` (React component), `content` (JSX).
-2. Add the post to the array consumed by `Blog.tsx`.
-3. Optionally add a corresponding graphic component in `BlogGraphics.tsx`.
+1. Add its metadata to `posts` in `src/data/siteMeta.ts` (`slug`, `title`, `excerpt`, `category`, `date`, `readTime`, `author`, optional `originalLink`, `featured`). The slug becomes the public URL `/blog/<slug>` — don't change it once deployed.
+2. Add the article JSX to `postContent` in `src/data/blogPosts.tsx` under the same slug. Code blocks: `<CodeBlock language="dart">`; register any new language in `CodeBlock.tsx`.
+3. Optionally add a graphic in `BlogGraphics.tsx` and map it in `src/data/graphics.tsx`.
+4. Add a 1200×630 share image at `public/og/blog-<slug>.png` (referenced automatically by `getRoutes()`).
 
 ### Adding a new project
 
-1. Add project data to the `projects` array in `src/components/Projects.tsx`.
-2. Optionally add a graphic component in `ProjectGraphics.tsx`.
+1. Add an entry to `projects` in `src/data/siteMeta.ts` with a permanent `slug` (URL `/work/<slug>`), `device` (`phone`/`tablet`/`browser`) and optionally `size: 'xl' | 'wide'` for a larger bento tile, `metrics`, `image` (real screenshot under `public/`) and `caseStudy` sections (each renders only when filled in).
+2. Optionally add a graphic in `ProjectGraphics.tsx` and map it in `src/data/graphics.tsx`.
 
 ### EmailJS integration
 
@@ -167,5 +185,5 @@ index.html                     # HTML entry point (loads /src/main.tsx)
 - No i18n — content is English only.
 - The `index.css` file is large (~3,500 lines) and contains all component styles in a single file.
 - `ProjectGraphics.tsx` is the largest component (~800 lines) due to inline SVG definitions.
-- Images are not optimized (profile.jpg is 1.47 MB).
+- To test routing like GitHub Pages does, serve the build with a plain static server (`python3 -m http.server -d dist`); `vite preview` adds its own SPA fallback and hides missing prerendered routes.
 - The ESLint config targets `.js/.jsx` file globs but the project uses `.ts/.tsx` — TypeScript strict mode provides the type checking safety net.

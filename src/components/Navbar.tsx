@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
 import ThemeToggle from './ThemeToggle';
+import LogoMark from './LogoMark';
 
 interface NavbarProps {
   activeSection: string;
   onNavigate: (id: string) => void;
+  onOpenPalette: () => void;
 }
 
-function Navbar({ activeSection, onNavigate }: NavbarProps) {
+const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.platform);
+
+function Navbar({ activeSection, onNavigate, onOpenPalette }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -34,8 +38,15 @@ function Navbar({ activeSection, onNavigate }: NavbarProps) {
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
-        <a href="#" className="nav-logo" onClick={() => handleNavClick('home')}>
-          <span className="logo-icon">◈</span>
+        <a
+          href="/"
+          className="nav-logo"
+          onClick={(e) => {
+            e.preventDefault();
+            handleNavClick('home');
+          }}
+        >
+          <span className="logo-icon"><LogoMark animated /></span>
           <span className="logo-text">Temna Digital</span>
         </a>
 
@@ -51,7 +62,7 @@ function Navbar({ activeSection, onNavigate }: NavbarProps) {
           {navItems.map((item) => (
             <li key={item.id}>
               <a
-                href={`#${item.id}`}
+                href={`/#${item.id}`}
                 className={activeSection === item.id ? 'active' : ''}
                 onClick={(e) => {
                   e.preventDefault();
@@ -64,7 +75,13 @@ function Navbar({ activeSection, onNavigate }: NavbarProps) {
             </li>
           ))}
         </ul>
-        <ThemeToggle />
+        <div className="nav-actions">
+          <button className="palette-trigger" onClick={onOpenPalette} aria-label="Open command menu">
+            <span className="palette-trigger-icon" aria-hidden="true">⌕</span>
+            <kbd className="palette-trigger-kbd">{isMac ? '⌘' : 'Ctrl'} K</kbd>
+          </button>
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );
