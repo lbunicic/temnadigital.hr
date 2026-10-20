@@ -1,4 +1,10 @@
-function Footer() {
+import LogoMark from './LogoMark';
+
+interface FooterProps {
+  onNavigate: (id: string) => void;
+}
+
+function Footer({ onNavigate }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -19,8 +25,15 @@ function Footer() {
       <div className="footer-container">
         <div className="footer-main">
           <div className="footer-brand">
-            <a href="#" className="footer-logo">
-              <span className="logo-icon">◈</span>
+            <a
+              href="/"
+              className="footer-logo"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('home');
+              }}
+            >
+              <span className="logo-icon"><LogoMark /></span>
               <span className="logo-text">Temna Digital</span>
             </a>
             <p className="footer-tagline">
@@ -47,7 +60,19 @@ function Footer() {
             <ul>
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a href={link.href}>{link.name}</a>
+                  {link.href.startsWith('#') ? (
+                    <a
+                      href={`/${link.href}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onNavigate(link.href.slice(1));
+                      }}
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <a href={link.href}>{link.name}</a>
+                  )}
                 </li>
               ))}
             </ul>

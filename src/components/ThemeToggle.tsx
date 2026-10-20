@@ -6,7 +6,10 @@ function ThemeToggle() {
   return (
     <button 
       className="theme-toggle" 
-      onClick={toggleTheme}
+      onClick={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        toggleTheme({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+      }}
       aria-label="Toggle theme"
       title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >

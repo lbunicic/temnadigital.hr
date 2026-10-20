@@ -1,6 +1,40 @@
 import { useState, useEffect } from 'react';
 import { FaApple, FaGlobe } from 'react-icons/fa';
 import { SiFlutter } from 'react-icons/si';
+import { projects, SITE } from '../data/siteMeta';
+
+const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+  hour: '2-digit',
+  minute: '2-digit',
+  timeZone: SITE.timeZone,
+  timeZoneName: 'short',
+});
+
+function LiveClock() {
+  const [now, setNow] = useState(() => new Date());
+
+  useEffect(() => {
+    const interval = window.setInterval(() => setNow(new Date()), 15000);
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="hero-status">
+      <span className="status-dot" aria-hidden="true"></span>
+      <span>{SITE.location}</span>
+      <span className="hero-status-divider" aria-hidden="true">·</span>
+      <time dateTime={now.toISOString()} className="hero-status-time">
+        {timeFormatter.format(now)}
+      </time>
+      {SITE.availability && (
+        <>
+          <span className="hero-status-divider" aria-hidden="true">·</span>
+          <span>{SITE.availability}</span>
+        </>
+      )}
+    </div>
+  );
+}
 
 interface HeroProps {
   onNavigate: (id: string) => void;
@@ -47,7 +81,7 @@ function Hero({ onNavigate, onTechClick }: HeroProps) {
       const startTime = Date.now();
       const endValues = {
         years: 7,
-        projects: 9
+        projects: projects.length
       };
 
       const animate = () => {
@@ -80,6 +114,7 @@ function Hero({ onNavigate, onTechClick }: HeroProps) {
       </div>
 
       <div className="hero-content">
+        <LiveClock />
         <h1 className="hero-title">
           <span className="hero-greeting">Hello, I'm</span>
           <span className="hero-name">

@@ -1,23 +1,8 @@
-import { useState } from 'react';
-import BlogPost, { BlogPostData } from './BlogPost';
-import { typeDrivenDesignPost, bleSdkPost } from '../data/blogPosts';
+import Link from './Link';
+import { posts } from '../data/siteMeta';
+import { postGraphic } from '../data/graphics';
 
 function Blog() {
-  const [selectedPost, setSelectedPost] = useState<BlogPostData | null>(null);
-
-  const posts = [
-    {
-      ...typeDrivenDesignPost,
-      featured: true,
-      fullPost: typeDrivenDesignPost,
-    },
-    {
-      ...bleSdkPost,
-      featured: false,
-      fullPost: bleSdkPost,
-    },
-  ];
-
   const featuredPost = posts.find(p => p.featured);
   const regularPosts = posts.filter(p => !p.featured);
 
@@ -38,7 +23,7 @@ function Blog() {
           {featuredPost && (
             <article className="blog-card featured">
               <div className="blog-image">
-                {featuredPost.graphic}
+                {postGraphic(featuredPost.slug)}
                 <span className="blog-category">{featuredPost.category}</span>
               </div>
               <div className="blog-content">
@@ -49,22 +34,19 @@ function Blog() {
                 </div>
                 <h3 className="blog-title">{featuredPost.title}</h3>
                 <p className="blog-excerpt">{featuredPost.excerpt}</p>
-                <button
-                  onClick={() => setSelectedPost(featuredPost.fullPost)}
-                  className="blog-link blog-link-button"
-                >
+                <Link to={`/blog/${featuredPost.slug}`} className="blog-link blog-link-button">
                   Read Article
                   <span className="link-arrow">→</span>
-                </button>
+                </Link>
               </div>
             </article>
           )}
 
           <div className="blog-list">
             {regularPosts.map((post) => (
-              <article key={post.id} className="blog-card compact">
+              <article key={post.slug} className="blog-card compact">
                 <div className="blog-graphic-small">
-                  {post.graphic}
+                  {postGraphic(post.slug)}
                 </div>
                 <div className="blog-content">
                   <div className="blog-meta">
@@ -75,12 +57,9 @@ function Blog() {
                   <p className="blog-excerpt">{post.excerpt}</p>
                   <div className="blog-footer">
                     <span className="blog-read-time">{post.readTime}</span>
-                    <button
-                      onClick={() => setSelectedPost(post.fullPost)}
-                      className="blog-link blog-link-button"
-                    >
+                    <Link to={`/blog/${post.slug}`} className="blog-link blog-link-button">
                       Read →
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </article>
@@ -89,15 +68,11 @@ function Blog() {
         </div>
 
         <div className="blog-cta">
-          <button className="btn btn-secondary">
+          <Link to="/blog" className="btn btn-secondary">
             View All Articles
-          </button>
+          </Link>
         </div>
       </div>
-
-      {selectedPost && (
-        <BlogPost post={selectedPost} onClose={() => setSelectedPost(null)} />
-      )}
     </section>
   );
 }
